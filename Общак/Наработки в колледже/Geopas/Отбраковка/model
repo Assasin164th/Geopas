@@ -1,0 +1,268 @@
+# ============================================
+# МОДЕЛЬ ПРОГНОЗА УРОВНЯ ВОДЫ
+# ============================================
+
+# 1. ИМПОРТ БИБЛИОТЕК (подключаем нужные инструменты)
+import pandas as pd          # для работы с таблицами
+import numpy as np           # для математических операций
+import matplotlib.pyplot as plt  # для построения графиков
+from prophet import Prophet  # модель прогнозирования от Facebook
+from sklearn.metrics import mean_absolute_error, mean_squared_error  # для оценки качества
+
+# 2. ЗАГРУЖАЕМ ДАННЫЕ С IoT
+print("=" * 50)
+print("ШАГ 1: Загрузка данных с IoT-устройства")
+print("=" * 50)
+
+df = pd.read_csv('kiyazevo_iot_realistic.csv')
+print(f"Загружено {len(df)} записей")
+print(f"Период: с {df['timestamp'].iloc[0]} по {df['timestamp'].iloc[-1]}")
+print(f"\nПервые 5 строк данных:")
+print(df.head())
+
+# 3. ПРЕОБРАЗУЕМ ВРЕМЯ В ПРАВИЛЬНЫЙ ФОРМАТ
+df['timestamp'] = pd.to_datetime(df['timestamp'])
+
+# 4. КАЛИБРОВКА: ПЕРЕВОДИМ ЭЛЕКТРОПРОВОДНОСТЬ (EC) В УРОВЕНЬ ВОДЫ
+print("\n" + "=" * 50)
+print("ШАГ 2: Калибровка - перевод EC в уровень воды")
+print("=" * 50)
+
+# Находим минимальное и максимальное значение EC в наших данных
+min_ec = df['ec_microsiemens'].min()
+max_ec = df['ec_microsiemens'].max()
+print(f"Минимальная электропроводность: {min_ec} µS/cm")
+print(f"Максимальная электропроводность: {max_ec} µS/cm")
+
+# Задаем соответствующие уровни воды (это наши "опорные точки")
+# Мы берем эти цифры из справочных данных Росгидромета для реки Яйва
+min_level = 1.5   # минимальный уровень воды (метров) - при минимальной EC
+max_level = 4.0   # максимальный уровень воды (метров) - при максимальной EC
+
+print(f"При EC={min_ec} уровень воды = {min_level} м")
+print(f"При EC={max_ec} уровень воды = {max_level} м")
+
+# Создаем формулу линейного пересчета
+# Чем выше EC, тем выше уровень воды
+df['water_level_m'] = min_level + (df['ec_microsiemens'] - min_ec) * (max_level - min_level) / (max_ec - min_ec)
+
+print(f"\nУровень воды рассчитан!")
+print(f"Пример: при EC={df['ec_microsiemens'].iloc[0]} уровень = {df['water_level_m'].iloc[0]:.2f} м")
+
+# 5. СТРОИМ ГРАФИК ЭЛЕКТРОПРОВОДНОСТИ И УРОВНЯ ВОДЫ
+print("\n" + "=" * 50)
+print("ШАГ 3: Визуализация данных")
+print("=" * 50)
+
+# Создаем фигуру с двумя подграфиками
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
+
+# График электропроводности
+ax1.plot(df['timestamp'], df['ec_microsiemens'], color='blue', linewidth=1)
+ax1.set_ylabel('Электропроводность (µS/cm)', fontsize=12)
+ax1.set_title('Данные с IoT-датчика: Электропроводность воды', fontsize=14)
+ax1.grid(True, alpha=0.3)
+
+# График уровня воды (полученный калибровкой)
+ax2.plot(df['timestamp'], df['water_level_m'], color='green', linewidth=1)
+ax2.set_ylabel('Уровень воды (метры)', fontsize=12)
+ax2.set_xlabel('Дата и время', fontsize=12)
+ax2.set_title('Рассчитанный уровень воды в реке Яйва', fontsize=14)
+ax2.grid(True, alpha=0.3)
+
+# Добавляем опасный уровень (порог подтопления)
+danger_level = 3.0  # при уровне выше 3 метров начинается подтопление
+ax2.axhline(y=danger_level, color='red', linestyle='--', linewidth=2, label=f'Опасный уровень ({danger_level} м)')
+ax2.legend()
+
+plt.tight_layout()
+plt.savefig('1_water_level_analysis.png', dpi=150)
+print("Сохранен график: 1_water_level_analysis.png")
+plt.show()
+
+# 6. ПОДГОТОВКА ДАННЫХ ДЛЯ МОДЕЛИ PROPHET
+print("\n" + "=" * 50)
+print("ШАГ 4: Подготовка данных для прогнозной модели")
+print("=" * 50)
+
+# Prophet требует две колонки: ds (дата/время) и y (значение, которое предсказываем)
+df_prophet = df[['timestamp', 'water_level_m']].copy()
+df_prophet = df_prophet.rename(columns={'timestamp': 'ds', 'water_level_m': 'y'})
+
+print(f"Подготовлено {len(df_prophet)} записей для обучения модели")
+
+# 7. ОБУЧАЕМ МОДЕЛЬ PROPHET
+print("\n" + "=" * 50)
+print("ШАГ 5: Обучение модели прогноза")
+print("=" * 50)
+
+# Создаем модель
+# changepoint_prior_scale - отвечает за чувствительность к изменениям (чем больше, тем сильнее модель реагирует на скачки)
+model = Prophet(
+    changepoint_prior_scale=0.5,  # средняя чувствительность
+    yearly_seasonality=False,      # отключаем годовую сезонность (у нас мало данных)
+    weekly_seasonality=True,       # включаем недельную сезонность
+    daily_seasonality=True         # включаем суточную сезонность
+)
+
+# Обучаем модель на наших данных
+model.fit(df_prophet)
+print("Модель обучена!")
+
+# 8. СОЗДАЕМ ПРОГНОЗ НА 72 ЧАСА ВПЕРЕД
+print("\n" + "=" * 50)
+print("ШАГ 6: Создание прогноза на 72 часа")
+print("=" * 50)
+
+# Создаем датафрейм с будущими датами (72 часа)
+future = model.make_future_dataframe(periods=72, freq='H', include_history=False)
+
+# Делаем прогноз
+forecast = model.predict(future)
+
+# Извлекаем только нужные колонки
+forecast_72h = forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].copy()
+forecast_72h.columns = ['datetime', 'predicted_level', 'lower_bound', 'upper_bound']
+
+print(f"Прогноз создан на {len(forecast_72h)} часов вперед")
+print(f"\nПервые 5 часов прогноза:")
+print(forecast_72h.head())
+
+# 9. ПРИМЕНЯЕМ КЛИМАТИЧЕСКУЮ КОРРЕКЦИЮ (поправка на половодье)
+print("\n" + "=" * 50)
+print("ШАГ 7: Климатическая коррекция (учет половодья)")
+print("=" * 50)
+
+# По данным Росгидромета, в апреле во время половодья уровень воды на 20% выше
+# Это называется "среднеклиматическая поправка"
+climatic_factor = 1.2  # 20% поправка
+print(f"Коэффициент половодья (из прогноза Росгидромета): {climatic_factor}")
+
+# Применяем поправку ко всем значениям прогноза
+forecast_72h['corrected_level'] = forecast_72h['predicted_level'] * climatic_factor
+forecast_72h['corrected_lower'] = forecast_72h['lower_bound'] * climatic_factor
+forecast_72h['corrected_upper'] = forecast_72h['upper_bound'] * climatic_factor
+
+print("Климатическая коррекция применена!")
+
+# 10. СОХРАНЯЕМ ПРОГНОЗ В ФАЙЛ
+forecast_72h.to_csv('forecast_72h.csv', index=False)
+print("\nПрогноз сохранен в файл: forecast_72h.csv")
+
+# 11. СТРОИМ ГРАФИК ПРОГНОЗА
+print("\n" + "=" * 50)
+print("ШАГ 8: Визуализация прогноза")
+print("=" * 50)
+
+fig, ax = plt.subplots(figsize=(14, 6))
+
+# Рисуем исторические данные (только последние 100 часов для наглядности)
+history_recent = df_prophet.tail(100)
+ax.plot(history_recent['ds'], history_recent['y'], 
+        color='blue', linewidth=2, label='Исторические данные (уровень воды)')
+
+# Рисуем прогноз с учетом климатической коррекции
+ax.plot(forecast_72h['datetime'], forecast_72h['corrected_level'], 
+        color='red', linewidth=2, label='Прогноз (с учетом половодья)')
+
+# Рисуем доверительные интервалы (область неопределенности)
+ax.fill_between(forecast_72h['datetime'], 
+                forecast_72h['corrected_lower'], 
+                forecast_72h['corrected_upper'], 
+                color='red', alpha=0.2, label='Доверительный интервал (80%)')
+
+# Добавляем опасный уровень
+ax.axhline(y=3.0, color='orange', linestyle='--', linewidth=2, label='Опасный уровень (3.0 м)')
+
+ax.set_xlabel('Дата и время', fontsize=12)
+ax.set_ylabel('Уровень воды (метры)', fontsize=12)
+ax.set_title('Прогноз уровня воды на реке Яйва на 72 часа (с учетом половодья)', fontsize=14)
+ax.legend(loc='upper left')
+ax.grid(True, alpha=0.3)
+
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('2_forecast_72h.png', dpi=150)
+print("Сохранен график: 2_forecast_72h.png")
+plt.show()
+
+# 12. ОЦЕНКА КАЧЕСТВА ПРОГНОЗА (если у нас есть фактические данные)
+print("\n" + "=" * 50)
+print("ШАГ 9: Оценка качества прогноза")
+print("=" * 50)
+
+# Для оценки качества мы используем последние 48 часов данных как "факт"
+# Обучаем модель на первых данных, проверяем на последних
+
+# Разделяем данные: 70% на обучение, 30% на проверку
+train_size = int(len(df_prophet) * 0.7)
+train_data = df_prophet.iloc[:train_size]
+test_data = df_prophet.iloc[train_size:]
+
+print(f"Обучающая выборка: {len(train_data)} записей")
+print(f"Проверочная выборка: {len(test_data)} записей")
+
+# Обучаем новую модель только на тренировочных данных
+model_test = Prophet(changepoint_prior_scale=0.5, daily_seasonality=True)
+model_test.fit(train_data)
+
+# Делаем прогноз на период проверочной выборки
+future_test = model_test.make_future_dataframe(periods=len(test_data), freq='H', include_history=False)
+forecast_test = model_test.predict(future_test)
+
+# Сравниваем прогноз с фактическими данными
+predicted_values = forecast_test['yhat'].values * climatic_factor  # применяем климатическую поправку
+actual_values = test_data['y'].values
+
+# Рассчитываем метрики ошибки
+mae = mean_absolute_error(actual_values, predicted_values)
+rmse = np.sqrt(mean_squared_error(actual_values, predicted_values))
+mape = np.mean(np.abs((actual_values - predicted_values) / actual_values)) * 100
+
+print(f"\nРезультаты оценки качества прогноза:")
+print(f"Средняя абсолютная ошибка (MAE): {mae:.3f} метров")
+print(f"Среднеквадратичная ошибка (RMSE): {rmse:.3f} метров")
+print(f"Средняя относительная ошибка (MAPE): {mape:.1f}%")
+
+# Оцениваем качество
+if mae < 0.15:
+    quality = "Отличное качество!"
+elif mae < 0.3:
+    quality = "Хорошее качество"
+else:
+    quality = "Удовлетворительное качество"
+
+print(f"\nВердикт: {quality}")
+
+# Строим график сравнения
+fig, ax = plt.subplots(figsize=(12, 5))
+ax.plot(test_data['ds'], actual_values, 'b-', linewidth=2, label='Фактические данные')
+ax.plot(test_data['ds'], predicted_values, 'r--', linewidth=2, label='Прогноз модели')
+ax.set_xlabel('Дата', fontsize=12)
+ax.set_ylabel('Уровень воды (м)', fontsize=12)
+ax.set_title('Сравнение прогноза с фактическими данными (проверка качества)', fontsize=14)
+ax.legend()
+ax.grid(True, alpha=0.3)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('3_forecast_quality.png', dpi=150)
+print("Сохранен график: 3_forecast_quality.png")
+plt.show()
+
+# 13. ВЫВОДИМ ИТОГОВЫЙ ПРОГНОЗ В ТАБЛИЧНОМ ВИДЕ
+print("\n" + "=" * 50)
+print("ИТОГОВЫЙ ПРОГНОЗ НА 72 ЧАСА (почасовой)")
+print("=" * 50)
+print("\nПервые 12 часов прогноза:")
+print(forecast_72h[['datetime', 'corrected_level', 'corrected_lower', 'corrected_upper']].head(12).to_string(index=False))
+
+# Находим максимальный прогнозируемый уровень
+max_level = forecast_72h['corrected_level'].max()
+max_time = forecast_72h.loc[forecast_72h['corrected_level'].idxmax(), 'datetime']
+print(f"\n⚠️  ВНИМАНИЕ: Максимальный прогнозируемый уровень воды: {max_level:.2f} м")
+print(f"   Ожидается: {max_time}")
+
+if max_level > 3.0:
+    print(f"   🚨 ЭТО ПРЕВЫШАЕТ ОПАСНЫЙ УРОВЕНЬ (3.0 м)! Возможно подтопление!")
+else:
+    print(f"   ✅ Уровень ниже опасного порога.")

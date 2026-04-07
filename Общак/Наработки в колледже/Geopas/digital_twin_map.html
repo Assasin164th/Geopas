@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_6823af2ec576e499d44bfb4dd384b870 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style="position: fixed; bottom: 50px; left: 50px; z-index: 1000; 
+                background-color: red; color: white; padding: 15px; 
+                border-radius: 10px; font-family: Arial; font-weight: bold;">
+        ⚠️ ПРЕДУПРЕЖДЕНИЕ!<br>
+        Прогнозируемый уровень воды: 3.36 м<br>
+        Превышает опасный порог (3.0 м)!<br>
+        Возможно подтопление прибрежных территорий!
+    </div>
+    
+    
+<div style="position: fixed; bottom: 50px; right: 50px; z-index: 1000; 
+            background-color: white; padding: 10px; border: 2px solid black; 
+            border-radius: 5px; font-family: Arial; font-size: 12px;">
+    <b>Легенда:</b><br>
+    <span style="color: blue;">●</span> Синяя зона: уровень в начале<br>
+    <span style="color: red;">●</span> Красная зона: уровень через 72 часа<br>
+    <span style="color: orange;">■</span> Зона влияния шахтного сброса<br>
+    <span style="color: blue;">━━</span> Русло реки
+</div>
+    
+            <div class="folium-map" id="map_6823af2ec576e499d44bfb4dd384b870" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_6823af2ec576e499d44bfb4dd384b870 = L.map(
+                "map_6823af2ec576e499d44bfb4dd384b870",
+                {
+                    center: [59.05, 57.65],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 14,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_8e4589c193caba1e6701664dc97e3454 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_8e4589c193caba1e6701664dc97e3454.addTo(map_6823af2ec576e499d44bfb4dd384b870);
+        
+    
+            var marker_f4ab8ce353f3a79216dfc6e81b16d83c = L.marker(
+                [59.05, 57.65],
+                {
+}
+            ).addTo(map_6823af2ec576e499d44bfb4dd384b870);
+        
+    
+            var icon_d842ee85e1518db2c55499770d2fa17a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9a3edac16cce417bda21236766b8b4ed = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8b5541eece81cd752d8228521c294756 = $(`<div id="html_8b5541eece81cd752d8228521c294756" style="width: 100.0%; height: 100.0%;"><b>IoT Датчик YAIVA_01</b><br>Место: 500 м ниже штольни им. Калинина</div>`)[0];
+                popup_9a3edac16cce417bda21236766b8b4ed.setContent(html_8b5541eece81cd752d8228521c294756);
+            
+        
+
+        marker_f4ab8ce353f3a79216dfc6e81b16d83c.bindPopup(popup_9a3edac16cce417bda21236766b8b4ed)
+        ;
+
+        
+    
+    
+            marker_f4ab8ce353f3a79216dfc6e81b16d83c.bindTooltip(
+                `<div>
+                     Датчик
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f4ab8ce353f3a79216dfc6e81b16d83c.setIcon(icon_d842ee85e1518db2c55499770d2fa17a);
+            
+    
+            var circle_0051c10b65cc66ac2f8703a5d8c65cb4 = L.circle(
+                [59.05, 57.65],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 103.48189834984699, "stroke": true, "weight": 3}
+            ).addTo(map_6823af2ec576e499d44bfb4dd384b870);
+        
+    
+        var popup_f57b4dfa6399037e10ed7a905de760ee = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a6bbe907640a4517df9cd787cc236b57 = $(`<div id="html_a6bbe907640a4517df9cd787cc236b57" style="width: 100.0%; height: 100.0%;">Начало периода: уровень 3.28 м</div>`)[0];
+                popup_f57b4dfa6399037e10ed7a905de760ee.setContent(html_a6bbe907640a4517df9cd787cc236b57);
+            
+        
+
+        circle_0051c10b65cc66ac2f8703a5d8c65cb4.bindPopup(popup_f57b4dfa6399037e10ed7a905de760ee)
+        ;
+
+        
+    
+    
+            circle_0051c10b65cc66ac2f8703a5d8c65cb4.bindTooltip(
+                `<div>
+                     Зона воды (начало)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_7a790bc0b4f424ec2e637e4dfd40dc8c = L.circle(
+                [59.05, 57.65],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.3, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 105.9003563547624, "stroke": true, "weight": 3}
+            ).addTo(map_6823af2ec576e499d44bfb4dd384b870);
+        
+    
+        var popup_8a24ccd48dcbe4c50016f4030c611a1d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d923416538938a7554845ee88e29da1a = $(`<div id="html_d923416538938a7554845ee88e29da1a" style="width: 100.0%; height: 100.0%;">Конец периода (72ч): уровень 3.36 м</div>`)[0];
+                popup_8a24ccd48dcbe4c50016f4030c611a1d.setContent(html_d923416538938a7554845ee88e29da1a);
+            
+        
+
+        circle_7a790bc0b4f424ec2e637e4dfd40dc8c.bindPopup(popup_8a24ccd48dcbe4c50016f4030c611a1d)
+        ;
+
+        
+    
+    
+            circle_7a790bc0b4f424ec2e637e4dfd40dc8c.bindTooltip(
+                `<div>
+                     Зона воды (конец)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_b41409c237bf8dcc05bad918df507a33 = L.polygon(
+                [[59.047, 57.655], [59.047999999999995, 57.658], [59.050999999999995, 57.656], [59.05, 57.653]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_6823af2ec576e499d44bfb4dd384b870);
+        
+    
+        var popup_cac3af9414c46317edf84a477448801b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_48ac114c900b17a06729611fc04f53b6 = $(`<div id="html_48ac114c900b17a06729611fc04f53b6" style="width: 100.0%; height: 100.0%;">Зона сильного влияния шахтного сброса</div>`)[0];
+                popup_cac3af9414c46317edf84a477448801b.setContent(html_48ac114c900b17a06729611fc04f53b6);
+            
+        
+
+        polygon_b41409c237bf8dcc05bad918df507a33.bindPopup(popup_cac3af9414c46317edf84a477448801b)
+        ;
+
+        
+    
+    
+            polygon_b41409c237bf8dcc05bad918df507a33.bindTooltip(
+                `<div>
+                     Влияние сброса
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_b62302f8050a6ea15f37ebfc17f07583 = L.polyline(
+                [[59.055, 57.64], [59.053, 57.644999999999996], [59.05, 57.65], [59.047, 57.655], [59.044999999999995, 57.66]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_6823af2ec576e499d44bfb4dd384b870);
+        
+    
+        var popup_1959384ba4a918a3fa7282f251f5cb25 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_95f369ce4de93a888a2911d372937f5c = $(`<div id="html_95f369ce4de93a888a2911d372937f5c" style="width: 100.0%; height: 100.0%;">Русло реки Яйва</div>`)[0];
+                popup_1959384ba4a918a3fa7282f251f5cb25.setContent(html_95f369ce4de93a888a2911d372937f5c);
+            
+        
+
+        poly_line_b62302f8050a6ea15f37ebfc17f07583.bindPopup(popup_1959384ba4a918a3fa7282f251f5cb25)
+        ;
+
+        
+    
+    
+            poly_line_b62302f8050a6ea15f37ebfc17f07583.bindTooltip(
+                `<div>
+                     Река Яйва
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>

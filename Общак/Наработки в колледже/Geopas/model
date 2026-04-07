@@ -1,0 +1,244 @@
+# ============================================
+# МОДЕЛЬ ПРОГНОЗА УРОВНЯ ВОДЫ (ИСПРАВЛЕННАЯ ВЕРСИЯ 2)
+# ============================================
+
+# 1. ИМПОРТ БИБЛИОТЕК
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+
+print("=" * 50)
+print("ЗАПУСК ПРОГНОЗНОЙ МОДЕЛИ")
+print("=" * 50)
+
+# 2. ПРОВЕРЯЕМ, ЕСТЬ ЛИ ФАЙЛ С ДАННЫМИ
+print("\nШаг 1: Проверка наличия файла с данными...")
+
+if not os.path.exists('kiyazevo_iot_realistic.csv'):
+    print("❌ ОШИБКА: Файл kiyazevo_iot_realistic.csv не найден!")
+    print("   Убедитесь, что файл лежит в той же папке, что и этот скрипт")
+    print(f"   Текущая папка: {os.getcwd()}")
+    exit()
+else:
+    print("✅ Файл найден!")
+
+# 3. ЗАГРУЖАЕМ ДАННЫЕ
+print("\nШаг 2: Загрузка данных...")
+df = pd.read_csv('kiyazevo_iot_realistic.csv')
+print(f"✅ Загружено {len(df)} записей")
+print(f"   Период: с {df['timestamp'].iloc[0]} по {df['timestamp'].iloc[-1]}")
+
+# 4. ПРЕОБРАЗУЕМ ВРЕМЯ
+df['timestamp'] = pd.to_datetime(df['timestamp'])
+
+# 5. КАЛИБРОВКА: ПЕРЕВОДИМ EC В УРОВЕНЬ ВОДЫ
+print("\nШаг 3: Калибровка EC -> уровень воды...")
+
+min_ec = df['ec_microsiemens'].min()
+max_ec = df['ec_microsiemens'].max()
+print(f"   Минимальная EC: {min_ec}")
+print(f"   Максимальная EC: {max_ec}")
+
+min_level = 1.5   # минимальный уровень воды (м)
+max_level = 4.0   # максимальный уровень воды (м)
+
+df['water_level_m'] = min_level + (df['ec_microsiemens'] - min_ec) * (max_level - min_level) / (max_ec - min_ec)
+print(f"✅ Уровень воды рассчитан (от {df['water_level_m'].min():.2f} до {df['water_level_m'].max():.2f} м)")
+
+# 6. ПРОБУЕМ ИМПОРТИРОВАТЬ PROPHET (с обработкой ошибки)
+print("\nШаг 4: Загрузка библиотеки Prophet...")
+
+PROPHET_AVAILABLE = False
+try:
+    from prophet import Prophet
+    print("✅ Prophet загружен")
+    PROPHET_AVAILABLE = True
+except ImportError:
+    print("⚠️ Prophet не установлен. Используем упрощенный метод...")
+    print("   (Для установки Prophet выполните: pip install prophet)")
+
+# 7. ДЕЛАЕМ ПРОГНОЗ
+print("\nШаг 5: Создание прогноза на 72 часа...")
+
+if PROPHET_AVAILABLE:
+    # Используем Prophet (точный метод)
+    print("   Используем метод Prophet...")
+    df_prophet = df[['timestamp', 'water_level_m']].copy()
+    df_prophet = df_prophet.rename(columns={'timestamp': 'ds', 'water_level_m': 'y'})
+    
+    model = Prophet(changepoint_prior_scale=0.5, daily_seasonality=True)
+    model.fit(df_prophet)
+    
+    # ИСПРАВЛЕНО: используем 'h' вместо 'H' (маленькая буква)
+    future = model.make_future_dataframe(periods=72, freq='h', include_history=False)
+    forecast = model.predict(future)
+    
+    forecast_72h = pd.DataFrame({
+        'datetime': forecast['ds'],
+        'predicted_level': forecast['yhat'],
+        'lower_bound': forecast['yhat_lower'],
+        'upper_bound': forecast['yhat_upper']
+    })
+    print("   ✅ Прогноз Prophet создан")
+    
+else:
+    # Упрощенный метод (если Prophet не установлен)
+    print("   Используем упрощенный метод прогноза...")
+    
+    # Берем последние 24 часа для анализа тренда
+    last_values = df['water_level_m'].tail(24).values
+    
+    # Простой тренд: берем среднее изменение за последние часы
+    if len(last_values) > 1:
+        trend = (last_values[-1] - last_values[0]) / 24
+    else:
+        trend = 0
+    
+    # Создаем прогноз на 72 часа
+    last_value = df['water_level_m'].iloc[-1]
+    forecast_hours = 72
+    
+    predicted = []
+    lower = []
+    upper = []
+    
+    for i in range(forecast_hours):
+        pred = last_value + trend * (i + 1)
+        predicted.append(pred)
+        lower.append(pred - 0.15)  # доверительный интервал ±0.15м
+        upper.append(pred + 0.15)
+    
+    # Создаем даты для прогноза
+    last_date = df['timestamp'].iloc[-1]
+    future_dates = []
+    for i in range(forecast_hours):
+        future_dates.append(last_date + pd.Timedelta(hours=i+1))
+    
+    forecast_72h = pd.DataFrame({
+        'datetime': future_dates,
+        'predicted_level': predicted,
+        'lower_bound': lower,
+        'upper_bound': upper
+    })
+    print("   ✅ Упрощенный прогноз создан")
+
+print(f"   Прогноз на {len(forecast_72h)} часов")
+
+# 8. КЛИМАТИЧЕСКАЯ КОРРЕКЦИЯ
+print("\nШаг 6: Климатическая коррекция (учет половодья)...")
+
+climatic_factor = 1.2  # 20% поправка на половодье (данные Росгидромета)
+print(f"   Коэффициент половодья: {climatic_factor}")
+
+forecast_72h['corrected_level'] = forecast_72h['predicted_level'] * climatic_factor
+forecast_72h['corrected_lower'] = forecast_72h['lower_bound'] * climatic_factor
+forecast_72h['corrected_upper'] = forecast_72h['upper_bound'] * climatic_factor
+
+print("✅ Коррекция применена")
+
+# 9. СОХРАНЯЕМ ПРОГНОЗ В ФАЙЛ
+print("\nШаг 7: Сохранение прогноза...")
+
+try:
+    forecast_72h.to_csv('forecast_72h.csv', index=False, encoding='utf-8')
+    print("✅ Файл 'forecast_72h.csv' успешно создан!")
+    
+    # Проверяем, что файл действительно создался
+    if os.path.exists('forecast_72h.csv'):
+        file_size = os.path.getsize('forecast_72h.csv')
+        print(f"   Размер файла: {file_size} байт")
+        
+        # Показываем содержимое файла
+        print("\n   Первые 5 строк файла:")
+        print(forecast_72h[['datetime', 'corrected_level']].head().to_string(index=False))
+    else:
+        print("❌ ОШИБКА: Файл не создался!")
+        
+except Exception as e:
+    print(f"❌ Ошибка при сохранении: {e}")
+
+# 10. ВЫВОДИМ ПРОГНОЗ В КОНСОЛЬ
+print("\n" + "=" * 50)
+print("ПРОГНОЗ НА 72 ЧАСА (первые 12 часов):")
+print("=" * 50)
+print(forecast_72h[['datetime', 'corrected_level', 'corrected_lower', 'corrected_upper']].head(12).to_string(index=False))
+
+# 11. СТРОИМ ГРАФИК
+print("\nШаг 8: Построение графиков...")
+
+try:
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 10))
+    
+    # График 1: Электропроводность
+    ax1.plot(df['timestamp'], df['ec_microsiemens'], 'b-', linewidth=1)
+    ax1.set_ylabel('Электропроводность (µS/cm)', fontsize=12)
+    ax1.set_title('Данные с IoT-датчика (электропроводность)', fontsize=14)
+    ax1.grid(True, alpha=0.3)
+    
+    # График 2: Уровень воды (история + прогноз)
+    ax2.plot(df['timestamp'], df['water_level_m'], 'b-', linewidth=1.5, label='Исторические данные (калибровка)')
+    ax2.plot(forecast_72h['datetime'], forecast_72h['corrected_level'], 'r--', linewidth=2, label='Прогноз на 72 часа')
+    ax2.fill_between(forecast_72h['datetime'], 
+                     forecast_72h['corrected_lower'], 
+                     forecast_72h['corrected_upper'], 
+                     color='red', alpha=0.2, label='Доверительный интервал')
+    ax2.axhline(y=3.0, color='orange', linestyle='--', linewidth=2, label='Опасный уровень (3.0 м)')
+    ax2.set_ylabel('Уровень воды (метры)', fontsize=12)
+    ax2.set_xlabel('Дата и время', fontsize=12)
+    ax2.set_title('Прогноз уровня воды на реке Яйва на 72 часа (с учетом половодья)', fontsize=14)
+    ax2.legend(loc='upper left')
+    ax2.grid(True, alpha=0.3)
+    
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('forecast_graph.png', dpi=150)
+    print("✅ График сохранен: forecast_graph.png")
+    plt.show()
+    
+except Exception as e:
+    print(f"⚠️ Ошибка при построении графика: {e}")
+    print("   (Это не критично, прогноз все равно сохранен)")
+
+# 12. ОЦЕНКА КАЧЕСТВА
+print("\n" + "=" * 50)
+print("ОЦЕНКА КАЧЕСТВА ПРОГНОЗА")
+print("=" * 50)
+
+# Простая оценка
+max_pred = forecast_72h['corrected_level'].max()
+min_pred = forecast_72h['corrected_level'].min()
+mean_hist = df['water_level_m'].mean()
+max_hist = df['water_level_m'].max()
+
+print(f"Средний исторический уровень: {mean_hist:.2f} м")
+print(f"Максимальный исторический уровень: {max_hist:.2f} м")
+print(f"Максимальный прогнозируемый уровень: {max_pred:.2f} м")
+print(f"Минимальный прогнозируемый уровень: {min_pred:.2f} м")
+
+if max_pred > max_hist:
+    print("📈 Прогноз показывает рост уровня выше исторического максимума (половодье)")
+elif max_pred > mean_hist * 1.1:
+    print("📈 Прогноз показывает значительный рост уровня воды")
+else:
+    print("📊 Прогноз показывает стабильный уровень")
+
+if max_pred > 3.0:
+    print("\n🚨 ВНИМАНИЕ: Прогнозируется превышение опасного уровня (3.0 м)!")
+    print(f"   Максимальный уровень: {max_pred:.2f} м")
+    print("   Рекомендуется: оповестить население, готовиться к эвакуации")
+else:
+    print(f"\n✅ Уровень воды ниже опасного порога (макс: {max_pred:.2f} м)")
+
+# 13. ИТОГИ
+print("\n" + "=" * 50)
+print("ИТОГИ РАБОТЫ СКРИПТА")
+print("=" * 50)
+print("✅ СОЗДАНЫ ФАЙЛЫ:")
+print("   1. forecast_72h.csv - прогноз на 72 часа (почасовой)")
+print("   2. forecast_graph.png - график прогноза")
+print(f"\n📁 ПАПКА С ФАЙЛАМИ:")
+print(f"   {os.getcwd()}")
+print("\n💡 Следующие шаги:")
+print("   1. Запустите digital_twin_map.py для создания карты")
+print("   2. Запустите economic_damage.py для расчета ущерба")

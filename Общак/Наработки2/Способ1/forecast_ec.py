@@ -22,11 +22,10 @@ class ECProphet:
         df['ds'] = pd.to_datetime(df['timestamp'])
         df['y'] = df['ec_microsiemens']
         df = df[['ds','y']].dropna()
-        print(f"📊 Загружено {len(df)} записей EC: {df['y'].min():.0f}–{df['y'].max():.0f} мкСм/см")
+        print(f"Загружено {len(df)} записей EC: {df['y'].min():.0f}–{df['y'].max():.0f} мкСм/см")
         return df
 
     def get_weather(self, lat=58.966, lon=57.683, hours=72):
-        """Реальный прогноз погоды с Open-Meteo"""
         try:
             url = "https://api.open-meteo.com/v1/forecast"
             params = {
@@ -43,10 +42,10 @@ class ECProphet:
                 'temp_air': hourly['temperature_2m'],
                 'precip': hourly['precipitation']
             }).head(hours)
-            print("🌦️ Реальный прогноз погоды загружен")
+            print("Реальный прогноз погоды загружен")
             return df_weather
         except Exception as e:
-            print(f"⚠️ Ошибка погоды: {e}. Использую средние климатические значения.")
+            print(f"Ошибка погоды: {e}. Использую средние климатические значения.")
             return None
 
     def train(self, hist_df, weather_df=None):
@@ -70,7 +69,7 @@ class ECProphet:
             train['temp_air'] = 5.0
             train['precip'] = 2.0
         self.model.fit(train)
-        print("✅ Модель Prophet обучена")
+        print("Модель Prophet обучена")
 
     def predict(self, hours=72, weather_df=None):
         last = self.model.history['ds'].max()

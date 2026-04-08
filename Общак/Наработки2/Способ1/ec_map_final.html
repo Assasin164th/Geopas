@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_a66f9b415bd32f40dd324a588a27de5f {
+                #map_0c117171fe2c297bb4c231fc9fceff86 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -55,18 +55,18 @@
 </head>
 <body>
     
-    <h3 align="center">🔮 Цифровой двойник EC - ПРОГНОЗ на 72 часа</h3>
+    <h3 align="center">Цифровой двойник EC - ПРОГНОЗ на 72 часа</h3>
     
-            <div class="folium-map" id="map_a66f9b415bd32f40dd324a588a27de5f" ></div>
+            <div class="folium-map" id="map_0c117171fe2c297bb4c231fc9fceff86" ></div>
         
 </body>
 <script>
     
     
-            var map_a66f9b415bd32f40dd324a588a27de5f = L.map(
-                "map_a66f9b415bd32f40dd324a588a27de5f",
+            var map_0c117171fe2c297bb4c231fc9fceff86 = L.map(
+                "map_0c117171fe2c297bb4c231fc9fceff86",
                 {
-                    center: [59.16745925925925, 57.895082962962945],
+                    center: [58.82969311111112, 57.35500749999999],
                     crs: L.CRS.EPSG3857,
                     ...{
   "zoom": 8,
@@ -76,13 +76,13 @@
 
                 }
             );
-            L.control.scale().addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            L.control.scale().addTo(map_0c117171fe2c297bb4c231fc9fceff86);
 
             
 
         
     
-            var tile_layer_fc9fc699c7383701b8952ccd478dc20a = L.tileLayer(
+            var tile_layer_8503baaef6b0193c9b130f726fc853e0 = L.tileLayer(
                 "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
                 {
   "minZoom": 0,
@@ -99,46 +99,46 @@
             );
         
     
-            tile_layer_fc9fc699c7383701b8952ccd478dc20a.addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            tile_layer_8503baaef6b0193c9b130f726fc853e0.addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-    var color_map_bd077eb6ae3561dd4665fe890c772dd1 = {};
+    var color_map_0e588a4ba82cd7d55305c0c065637b06 = {};
 
     
-    color_map_bd077eb6ae3561dd4665fe890c772dd1.color = d3.scale.threshold()
+    color_map_0e588a4ba82cd7d55305c0c065637b06.color = d3.scale.threshold()
               .domain([2000.0, 2008.0160320641282, 2016.0320641282565, 2024.0480961923847, 2032.064128256513, 2040.0801603206412, 2048.0961923847694, 2056.112224448898, 2064.128256513026, 2072.1442885771544, 2080.1603206412824, 2088.176352705411, 2096.192384769539, 2104.2084168336673, 2112.224448897796, 2120.240480961924, 2128.2565130260523, 2136.2725450901803, 2144.2885771543088, 2152.304609218437, 2160.3206412825652, 2168.3366733466933, 2176.3527054108217, 2184.3687374749497, 2192.384769539078, 2200.400801603206, 2208.4168336673347, 2216.4328657314627, 2224.448897795591, 2232.4649298597196, 2240.4809619238476, 2248.496993987976, 2256.513026052104, 2264.5290581162326, 2272.5450901803606, 2280.561122244489, 2288.577154308617, 2296.5931863727455, 2304.6092184368736, 2312.625250501002, 2320.6412825651305, 2328.6573146292585, 2336.6733466933865, 2344.689378757515, 2352.7054108216435, 2360.7214428857715, 2368.7374749499, 2376.753507014028, 2384.7695390781564, 2392.7855711422844, 2400.801603206413, 2408.817635270541, 2416.8336673346694, 2424.8496993987974, 2432.865731462926, 2440.8817635270543, 2448.8977955911823, 2456.913827655311, 2464.929859719439, 2472.9458917835673, 2480.9619238476953, 2488.9779559118238, 2496.9939879759518, 2505.0100200400802, 2513.0260521042082, 2521.0420841683367, 2529.058116232465, 2537.074148296593, 2545.090180360721, 2553.1062124248497, 2561.122244488978, 2569.138276553106, 2577.1543086172346, 2585.1703406813626, 2593.186372745491, 2601.202404809619, 2609.2184368737476, 2617.2344689378756, 2625.250501002004, 2633.266533066132, 2641.2825651302605, 2649.298597194389, 2657.314629258517, 2665.330661322645, 2673.3466933867735, 2681.362725450902, 2689.37875751503, 2697.3947895791584, 2705.4108216432865, 2713.426853707415, 2721.442885771543, 2729.4589178356714, 2737.4749498998, 2745.490981963928, 2753.507014028056, 2761.5230460921844, 2769.539078156313, 2777.555110220441, 2785.5711422845693, 2793.5871743486973, 2801.603206412826, 2809.619238476954, 2817.6352705410823, 2825.6513026052103, 2833.6673346693387, 2841.6833667334668, 2849.699398797595, 2857.7154308617237, 2865.7314629258517, 2873.7474949899797, 2881.763527054108, 2889.7795591182366, 2897.7955911823647, 2905.811623246493, 2913.827655310621, 2921.8436873747496, 2929.8597194388776, 2937.875751503006, 2945.891783567134, 2953.9078156312626, 2961.9238476953906, 2969.939879759519, 2977.9559118236475, 2985.9719438877755, 2993.9879759519035, 3002.004008016032, 3010.0200400801605, 3018.0360721442885, 3026.0521042084165, 3034.0681362725454, 3042.0841683366734, 3050.1002004008014, 3058.11623246493, 3066.1322645290584, 3074.1482965931864, 3082.1643286573144, 3090.180360721443, 3098.1963927855713, 3106.2124248496993, 3114.2284569138274, 3122.244488977956, 3130.2605210420843, 3138.2765531062123, 3146.2925851703408, 3154.3086172344692, 3162.3246492985973, 3170.3406813627253, 3178.3567134268537, 3186.372745490982, 3194.38877755511, 3202.404809619238, 3210.4208416833667, 3218.436873747495, 3226.452905811623, 3234.468937875751, 3242.4849699398796, 3250.501002004008, 3258.517034068136, 3266.5330661322646, 3274.549098196393, 3282.565130260521, 3290.581162324649, 3298.5971943887776, 3306.613226452906, 3314.629258517034, 3322.645290581162, 3330.6613226452905, 3338.677354709419, 3346.693386773547, 3354.7094188376755, 3362.725450901804, 3370.741482965932, 3378.75751503006, 3386.7735470941884, 3394.789579158317, 3402.805611222445, 3410.821643286573, 3418.8376753507014, 3426.85370741483, 3434.869739478958, 3442.885771543086, 3450.9018036072143, 3458.917835671343, 3466.933867735471, 3474.9498997995993, 3482.9659318637277, 3490.9819639278558, 3498.9979959919838, 3507.0140280561122, 3515.0300601202407, 3523.0460921843687, 3531.0621242484967, 3539.078156312625, 3547.0941883767537, 3555.1102204408817, 3563.1262525050097, 3571.1422845691386, 3579.1583166332666, 3587.1743486973946, 3595.190380761523, 3603.2064128256516, 3611.2224448897796, 3619.2384769539076, 3627.254509018036, 3635.2705410821645, 3643.2865731462925, 3651.3026052104206, 3659.318637274549, 3667.3346693386775, 3675.3507014028055, 3683.366733466934, 3691.3827655310624, 3699.3987975951904, 3707.4148296593185, 3715.430861723447, 3723.4468937875754, 3731.4629258517034, 3739.4789579158314, 3747.49498997996, 3755.5110220440883, 3763.5270541082164, 3771.5430861723444, 3779.559118236473, 3787.5751503006013, 3795.5911823647293, 3803.607214428858, 3811.6232464929863, 3819.6392785571143, 3827.6553106212423, 3835.6713426853707, 3843.687374749499, 3851.703406813627, 3859.7194388777552, 3867.7354709418837, 3875.751503006012, 3883.76753507014, 3891.783567134268, 3899.799599198397, 3907.815631262525, 3915.831663326653, 3923.8476953907816, 3931.86372745491, 3939.879759519038, 3947.895791583166, 3955.9118236472946, 3963.927855711423, 3971.943887775551, 3979.959919839679, 3987.9759519038075, 3995.991983967936, 4004.008016032064, 4012.0240480961925, 4020.040080160321, 4028.056112224449, 4036.072144288577, 4044.0881763527054, 4052.1042084168334, 4060.120240480962, 4068.1362725450904, 4076.1523046092184, 4084.168336673347, 4092.184368737475, 4100.200400801603, 4108.216432865731, 4116.23246492986, 4124.248496993988, 4132.264529058117, 4140.280561122245, 4148.296593186373, 4156.312625250501, 4164.328657314629, 4172.344689378758, 4180.360721442886, 4188.376753507015, 4196.392785571143, 4204.408817635271, 4212.424849699399, 4220.440881763527, 4228.456913827655, 4236.472945891784, 4244.488977955912, 4252.505010020041, 4260.521042084169, 4268.537074148297, 4276.553106212425, 4284.569138276553, 4292.5851703406815, 4300.60120240481, 4308.6172344689385, 4316.6332665330665, 4324.6492985971945, 4332.6653306613225, 4340.6813627254505, 4348.6973947895785, 4356.7134268537075, 4364.7294589178355, 4372.745490981964, 4380.761523046092, 4388.77755511022, 4396.793587174348, 4404.809619238476, 4412.825651302605, 4420.841683366733, 4428.857715430862, 4436.87374749499, 4444.889779559118, 4452.905811623246, 4460.921843687374, 4468.937875751502, 4476.953907815631, 4484.969939879759, 4492.985971943888, 4501.002004008016, 4509.018036072144, 4517.034068136272, 4525.0501002004, 4533.066132264529, 4541.082164328657, 4549.098196392786, 4557.114228456914, 4565.130260521042, 4573.14629258517, 4581.162324649298, 4589.178356713426, 4597.194388777555, 4605.210420841684, 4613.226452905812, 4621.24248496994, 4629.258517034068, 4637.274549098196, 4645.290581162324, 4653.306613226453, 4661.322645290581, 4669.33867735471, 4677.354709418838, 4685.370741482966, 4693.386773547094, 4701.402805611222, 4709.418837675351, 4717.434869739479, 4725.450901803608, 4733.466933867736, 4741.482965931864, 4749.498997995992, 4757.51503006012, 4765.531062124248, 4773.547094188377, 4781.563126252505, 4789.579158316634, 4797.595190380762, 4805.61122244489, 4813.627254509018, 4821.643286573146, 4829.659318637275, 4837.675350701403, 4845.691382765532, 4853.70741482966, 4861.723446893788, 4869.739478957916, 4877.755511022044, 4885.771543086172, 4893.787575150301, 4901.803607214429, 4909.819639278558, 4917.835671342686, 4925.851703406814, 4933.867735470942, 4941.88376753507, 4949.899799599199, 4957.915831663327, 4965.9318637274555, 4973.9478957915835, 4981.9639278557115, 4989.9799599198395, 4997.9959919839675, 5006.012024048096, 5014.0280561122245, 5022.0440881763525, 5030.060120240481, 5038.076152304609, 5046.092184368737, 5054.108216432865, 5062.1242484969935, 5070.140280561122, 5078.15631262525, 5086.172344689379, 5094.188376753507, 5102.204408817635, 5110.220440881763, 5118.236472945891, 5126.252505010019, 5134.268537074148, 5142.284569138277, 5150.300601202405, 5158.316633266533, 5166.332665330661, 5174.348697394789, 5182.364729458917, 5190.380761523046, 5198.396793587174, 5206.412825651303, 5214.428857715431, 5222.444889779559, 5230.460921843687, 5238.476953907815, 5246.492985971944, 5254.509018036072, 5262.525050100201, 5270.541082164329, 5278.557114228457, 5286.573146292585, 5294.589178356713, 5302.605210420841, 5310.62124248497, 5318.637274549098, 5326.653306613227, 5334.669338677355, 5342.685370741483, 5350.701402805611, 5358.717434869739, 5366.733466933868, 5374.749498997996, 5382.765531062125, 5390.781563126253, 5398.797595190381, 5406.813627254509, 5414.829659318637, 5422.845691382765, 5430.861723446894, 5438.877755511022, 5446.893787575151, 5454.909819639279, 5462.925851703407, 5470.941883767535, 5478.957915831663, 5486.973947895792, 5494.98997995992, 5503.006012024049, 5511.022044088177, 5519.038076152305, 5527.054108216433, 5535.070140280561, 5543.086172344689, 5551.102204408818, 5559.118236472946, 5567.134268537075, 5575.150300601203, 5583.166332665331, 5591.182364729459, 5599.198396793587, 5607.214428857716, 5615.230460921844, 5623.2464929859725, 5631.2625250501005, 5639.2785571142285, 5647.294589178357, 5655.310621242485, 5663.326653306613, 5671.3426853707415, 5679.35871743487, 5687.374749498998, 5695.390781563126, 5703.406813627254, 5711.4228456913825, 5719.4388777555105, 5727.454909819639, 5735.470941883767, 5743.486973947896, 5751.503006012024, 5759.519038076152, 5767.53507014028, 5775.551102204408, 5783.567134268536, 5791.583166332665, 5799.599198396794, 5807.615230460922, 5815.63126252505, 5823.647294589178, 5831.663326653306, 5839.679358717434, 5847.695390781563, 5855.711422845691, 5863.72745490982, 5871.743486973948, 5879.759519038076, 5887.775551102204, 5895.791583166332, 5903.807615230461, 5911.823647294589, 5919.839679358718, 5927.855711422846, 5935.871743486974, 5943.887775551102, 5951.90380761523, 5959.919839679358, 5967.935871743487, 5975.951903807615, 5983.967935871744, 5991.983967935872, 6000.0])
               .range(['#008000ff', '#028100ff', '#048200ff', '#068300ff', '#088400ff', '#0a8500ff', '#0c8600ff', '#0e8700ff', '#108800ff', '#128900ff', '#148a00ff', '#168b00ff', '#188c00ff', '#1a8d00ff', '#1c8e00ff', '#1e8f00ff', '#209000ff', '#229100ff', '#249200ff', '#269300ff', '#299400ff', '#2b9500ff', '#2d9600ff', '#2f9800ff', '#319900ff', '#339a00ff', '#359b00ff', '#379c00ff', '#399d00ff', '#3b9e00ff', '#3d9f00ff', '#3fa000ff', '#41a100ff', '#43a200ff', '#45a300ff', '#47a400ff', '#49a500ff', '#4ba600ff', '#4da700ff', '#50a800ff', '#52a900ff', '#54aa00ff', '#56ab00ff', '#58ac00ff', '#5aad00ff', '#5cae00ff', '#5eaf00ff', '#60b000ff', '#62b100ff', '#64b200ff', '#66b300ff', '#68b400ff', '#6ab500ff', '#6cb600ff', '#6eb700ff', '#70b800ff', '#72b900ff', '#74ba00ff', '#77bb00ff', '#79bc00ff', '#7bbd00ff', '#7dbe00ff', '#7fbf00ff', '#81c000ff', '#83c100ff', '#85c200ff', '#87c300ff', '#89c400ff', '#8bc500ff', '#8dc700ff', '#8fc800ff', '#91c900ff', '#93ca00ff', '#95cb00ff', '#97cc00ff', '#99cd00ff', '#9bce00ff', '#9ecf00ff', '#a0d000ff', '#a2d100ff', '#a4d200ff', '#a6d300ff', '#a8d400ff', '#aad500ff', '#acd600ff', '#aed700ff', '#b0d800ff', '#b2d900ff', '#b4da00ff', '#b6db00ff', '#b8dc00ff', '#badd00ff', '#bcde00ff', '#bedf00ff', '#c0e000ff', '#c2e100ff', '#c5e200ff', '#c7e300ff', '#c9e400ff', '#cbe500ff', '#cde600ff', '#cfe700ff', '#d1e800ff', '#d3e900ff', '#d5ea00ff', '#d7eb00ff', '#d9ec00ff', '#dbed00ff', '#ddee00ff', '#dfef00ff', '#e1f000ff', '#e3f100ff', '#e5f200ff', '#e7f300ff', '#e9f500ff', '#ebf600ff', '#eef700ff', '#f0f800ff', '#f2f900ff', '#f4fa00ff', '#f6fb00ff', '#f8fc00ff', '#fafd00ff', '#fcfe00ff', '#feff00ff', '#ffff00ff', '#ffff00ff', '#fffe00ff', '#fffd00ff', '#fffc00ff', '#fffc00ff', '#fffb00ff', '#fffa00ff', '#fffa00ff', '#fff900ff', '#fff800ff', '#fff700ff', '#fff700ff', '#fff600ff', '#fff500ff', '#fff400ff', '#fff400ff', '#fff300ff', '#fff200ff', '#fff200ff', '#fff100ff', '#fff000ff', '#ffef00ff', '#ffef00ff', '#ffee00ff', '#ffed00ff', '#ffec00ff', '#ffec00ff', '#ffeb00ff', '#ffea00ff', '#ffea00ff', '#ffe900ff', '#ffe800ff', '#ffe700ff', '#ffe700ff', '#ffe600ff', '#ffe500ff', '#ffe500ff', '#ffe400ff', '#ffe300ff', '#ffe200ff', '#ffe200ff', '#ffe100ff', '#ffe000ff', '#ffdf00ff', '#ffdf00ff', '#ffde00ff', '#ffdd00ff', '#ffdd00ff', '#ffdc00ff', '#ffdb00ff', '#ffda00ff', '#ffda00ff', '#ffd900ff', '#ffd800ff', '#ffd700ff', '#ffd700ff', '#ffd600ff', '#ffd500ff', '#ffd500ff', '#ffd400ff', '#ffd300ff', '#ffd200ff', '#ffd200ff', '#ffd100ff', '#ffd000ff', '#ffd000ff', '#ffcf00ff', '#ffce00ff', '#ffcd00ff', '#ffcd00ff', '#ffcc00ff', '#ffcb00ff', '#ffca00ff', '#ffca00ff', '#ffc900ff', '#ffc800ff', '#ffc800ff', '#ffc700ff', '#ffc600ff', '#ffc500ff', '#ffc500ff', '#ffc400ff', '#ffc300ff', '#ffc200ff', '#ffc200ff', '#ffc100ff', '#ffc000ff', '#ffc000ff', '#ffbf00ff', '#ffbe00ff', '#ffbd00ff', '#ffbd00ff', '#ffbc00ff', '#ffbb00ff', '#ffbb00ff', '#ffba00ff', '#ffb900ff', '#ffb800ff', '#ffb800ff', '#ffb700ff', '#ffb600ff', '#ffb500ff', '#ffb500ff', '#ffb400ff', '#ffb300ff', '#ffb300ff', '#ffb200ff', '#ffb100ff', '#ffb000ff', '#ffb000ff', '#ffaf00ff', '#ffae00ff', '#ffad00ff', '#ffad00ff', '#ffac00ff', '#ffab00ff', '#ffab00ff', '#ffaa00ff', '#ffa900ff', '#ffa800ff', '#ffa800ff', '#ffa700ff', '#ffa600ff', '#ffa600ff', '#ffa400ff', '#ffa300ff', '#ffa200ff', '#ffa000ff', '#ff9f00ff', '#ff9e00ff', '#ff9d00ff', '#ff9b00ff', '#ff9a00ff', '#ff9900ff', '#ff9700ff', '#ff9600ff', '#ff9500ff', '#ff9300ff', '#ff9200ff', '#ff9100ff', '#ff8f00ff', '#ff8e00ff', '#ff8d00ff', '#ff8b00ff', '#ff8a00ff', '#ff8900ff', '#ff8700ff', '#ff8600ff', '#ff8500ff', '#ff8300ff', '#ff8200ff', '#ff8100ff', '#ff7f00ff', '#ff7e00ff', '#ff7d00ff', '#ff7b00ff', '#ff7a00ff', '#ff7900ff', '#ff7700ff', '#ff7600ff', '#ff7500ff', '#ff7300ff', '#ff7200ff', '#ff7100ff', '#ff6f00ff', '#ff6e00ff', '#ff6d00ff', '#ff6b00ff', '#ff6a00ff', '#ff6900ff', '#ff6700ff', '#ff6600ff', '#ff6500ff', '#ff6300ff', '#ff6200ff', '#ff6100ff', '#ff5f00ff', '#ff5e00ff', '#ff5d00ff', '#ff5b00ff', '#ff5a00ff', '#ff5900ff', '#ff5700ff', '#ff5600ff', '#ff5500ff', '#ff5300ff', '#ff5200ff', '#ff5100ff', '#ff5000ff', '#ff4e00ff', '#ff4d00ff', '#ff4c00ff', '#ff4a00ff', '#ff4900ff', '#ff4800ff', '#ff4600ff', '#ff4500ff', '#ff4400ff', '#ff4200ff', '#ff4100ff', '#ff4000ff', '#ff3e00ff', '#ff3d00ff', '#ff3c00ff', '#ff3a00ff', '#ff3900ff', '#ff3800ff', '#ff3600ff', '#ff3500ff', '#ff3400ff', '#ff3200ff', '#ff3100ff', '#ff3000ff', '#ff2e00ff', '#ff2d00ff', '#ff2c00ff', '#ff2a00ff', '#ff2900ff', '#ff2800ff', '#ff2600ff', '#ff2500ff', '#ff2400ff', '#ff2200ff', '#ff2100ff', '#ff2000ff', '#ff1e00ff', '#ff1d00ff', '#ff1c00ff', '#ff1a00ff', '#ff1900ff', '#ff1800ff', '#ff1600ff', '#ff1500ff', '#ff1400ff', '#ff1200ff', '#ff1100ff', '#ff1000ff', '#ff0e00ff', '#ff0d00ff', '#ff0c00ff', '#ff0a00ff', '#ff0900ff', '#ff0800ff', '#ff0600ff', '#ff0500ff', '#ff0400ff', '#ff0200ff', '#ff0100ff', '#ff0000ff', '#ff0000ff', '#fe0000ff', '#fd0000ff', '#fc0000ff', '#fb0000ff', '#fa0000ff', '#f90000ff', '#f80000ff', '#f70000ff', '#f60000ff', '#f50000ff', '#f50000ff', '#f40000ff', '#f30000ff', '#f20000ff', '#f10000ff', '#f00000ff', '#ef0000ff', '#ee0000ff', '#ed0000ff', '#ec0000ff', '#eb0000ff', '#ea0000ff', '#e90000ff', '#e80000ff', '#e70000ff', '#e70000ff', '#e60000ff', '#e50000ff', '#e40000ff', '#e30000ff', '#e20000ff', '#e10000ff', '#e00000ff', '#df0000ff', '#de0000ff', '#dd0000ff', '#dc0000ff', '#db0000ff', '#da0000ff', '#d90000ff', '#d90000ff', '#d80000ff', '#d70000ff', '#d60000ff', '#d50000ff', '#d40000ff', '#d30000ff', '#d20000ff', '#d10000ff', '#d00000ff', '#cf0000ff', '#ce0000ff', '#cd0000ff', '#cc0000ff', '#cb0000ff', '#cb0000ff', '#ca0000ff', '#c90000ff', '#c80000ff', '#c70000ff', '#c60000ff', '#c50000ff', '#c40000ff', '#c30000ff', '#c20000ff', '#c10000ff', '#c00000ff', '#bf0000ff', '#be0000ff', '#bd0000ff', '#bd0000ff', '#bc0000ff', '#bb0000ff', '#ba0000ff', '#b90000ff', '#b80000ff', '#b70000ff', '#b60000ff', '#b50000ff', '#b40000ff', '#b30000ff', '#b20000ff', '#b10000ff', '#b00000ff', '#af0000ff', '#af0000ff', '#ae0000ff', '#ad0000ff', '#ac0000ff', '#ab0000ff', '#aa0000ff', '#a90000ff', '#a80000ff', '#a70000ff', '#a60000ff', '#a50000ff', '#a40000ff', '#a30000ff', '#a20000ff', '#a10000ff', '#a10000ff', '#a00000ff', '#9f0000ff', '#9e0000ff', '#9d0000ff', '#9c0000ff', '#9b0000ff', '#9a0000ff', '#990000ff', '#980000ff', '#970000ff', '#960000ff', '#950000ff', '#940000ff', '#930000ff', '#930000ff', '#920000ff', '#910000ff', '#900000ff', '#8f0000ff', '#8e0000ff', '#8d0000ff', '#8c0000ff', '#8b0000ff']);
     
 
-    color_map_bd077eb6ae3561dd4665fe890c772dd1.x = d3.scale.linear()
+    color_map_0e588a4ba82cd7d55305c0c065637b06.x = d3.scale.linear()
               .domain([2000.0, 6000.0])
               .range([0, 450 - 50]);
 
-    color_map_bd077eb6ae3561dd4665fe890c772dd1.legend = L.control({position: 'topright'});
-    color_map_bd077eb6ae3561dd4665fe890c772dd1.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
-    color_map_bd077eb6ae3561dd4665fe890c772dd1.legend.addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+    color_map_0e588a4ba82cd7d55305c0c065637b06.legend = L.control({position: 'topright'});
+    color_map_0e588a4ba82cd7d55305c0c065637b06.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_0e588a4ba82cd7d55305c0c065637b06.legend.addTo(map_0c117171fe2c297bb4c231fc9fceff86);
 
-    color_map_bd077eb6ae3561dd4665fe890c772dd1.xAxis = d3.svg.axis()
-        .scale(color_map_bd077eb6ae3561dd4665fe890c772dd1.x)
+    color_map_0e588a4ba82cd7d55305c0c065637b06.xAxis = d3.svg.axis()
+        .scale(color_map_0e588a4ba82cd7d55305c0c065637b06.x)
         .orient("top")
         .tickSize(1)
         .tickValues([2000.0, 3000.0, 4000.0, 5000.0, 6000.0]);
 
-    color_map_bd077eb6ae3561dd4665fe890c772dd1.svg = d3.select(".legend.leaflet-control").append("svg")
+    color_map_0e588a4ba82cd7d55305c0c065637b06.svg = d3.select(".legend.leaflet-control").append("svg")
         .attr("id", 'legend')
         .attr("width", 450)
         .attr("height", 40);
 
-    color_map_bd077eb6ae3561dd4665fe890c772dd1.g = color_map_bd077eb6ae3561dd4665fe890c772dd1.svg.append("g")
+    color_map_0e588a4ba82cd7d55305c0c065637b06.g = color_map_0e588a4ba82cd7d55305c0c065637b06.svg.append("g")
         .attr("class", "key")
         .attr("fill", "black")
         .attr("transform", "translate(25,16)");
 
-    color_map_bd077eb6ae3561dd4665fe890c772dd1.g.selectAll("rect")
-        .data(color_map_bd077eb6ae3561dd4665fe890c772dd1.color.range().map(function(d, i) {
+    color_map_0e588a4ba82cd7d55305c0c065637b06.g.selectAll("rect")
+        .data(color_map_0e588a4ba82cd7d55305c0c065637b06.color.range().map(function(d, i) {
           return {
-            x0: i ? color_map_bd077eb6ae3561dd4665fe890c772dd1.x(color_map_bd077eb6ae3561dd4665fe890c772dd1.color.domain()[i - 1]) : color_map_bd077eb6ae3561dd4665fe890c772dd1.x.range()[0],
-            x1: i < color_map_bd077eb6ae3561dd4665fe890c772dd1.color.domain().length ? color_map_bd077eb6ae3561dd4665fe890c772dd1.x(color_map_bd077eb6ae3561dd4665fe890c772dd1.color.domain()[i]) : color_map_bd077eb6ae3561dd4665fe890c772dd1.x.range()[1],
+            x0: i ? color_map_0e588a4ba82cd7d55305c0c065637b06.x(color_map_0e588a4ba82cd7d55305c0c065637b06.color.domain()[i - 1]) : color_map_0e588a4ba82cd7d55305c0c065637b06.x.range()[0],
+            x1: i < color_map_0e588a4ba82cd7d55305c0c065637b06.color.domain().length ? color_map_0e588a4ba82cd7d55305c0c065637b06.x(color_map_0e588a4ba82cd7d55305c0c065637b06.color.domain()[i]) : color_map_0e588a4ba82cd7d55305c0c065637b06.x.range()[1],
             z: d
           };
         }))
@@ -148,658 +148,451 @@
         .attr("width", function(d) { return d.x1 - d.x0; })
         .style("fill", function(d) { return d.z; });
 
-    color_map_bd077eb6ae3561dd4665fe890c772dd1.g.call(color_map_bd077eb6ae3561dd4665fe890c772dd1.xAxis).append("text")
+    color_map_0e588a4ba82cd7d55305c0c065637b06.g.call(color_map_0e588a4ba82cd7d55305c0c065637b06.xAxis).append("text")
         .attr("class", "caption")
         .attr("y", 21)
         .attr("fill", "black")
-        .text("\u042d\u043b\u0435\u043a\u0442\u0440\u043e\u043f\u0440\u043e\u0432\u043e\u0434\u043d\u043e\u0441\u0442\u044c EC (\u043c\u043a\u0421\u043c/\u0441\u043c)");
+        .text("EC (\u043c\u043a\u0421\u043c/\u0441\u043c)");
     
-            var poly_line_a07588134434761b4b3f1fdbd668699d = L.polyline(
-                [[59.34361, 59.14028], [59.7, 59.0], [59.65, 58.86667], [59.625, 58.83333], [59.6, 58.8], [59.55, 58.7], [59.5, 58.6], [59.41667, 58.43333], [59.4, 58.4], [59.325, 58.25], [59.3, 58.21667], [59.275, 58.18333], [59.20833, 58.01667], [59.125, 57.8], [59.04167, 57.61667], [59.01667, 57.56667], [58.93111, 57.38139], [58.93056, 57.38028], [58.925, 57.37194], [58.92139, 57.3625], [58.91528, 57.34806], [58.89722, 57.28472], [58.865, 57.19556], [58.75, 57.03], [58.70139, 56.93556], [58.71389, 56.82389], [58.89361, 56.62972]],
+            var poly_line_a1633dcb78f51b338b63e7fdd4aefc2a = L.polyline(
+                [[58.8347, 57.787299], [58.862158, 57.737422], [58.84216, 57.680513], [58.867325, 57.619516], [58.860082, 57.603784], [58.863659, 57.565159], [58.865223, 57.485752], [58.873514, 57.463347], [58.845389, 57.415916], [58.823152, 57.410374], [58.808828, 57.378816], [58.838695, 57.326353], [58.825701, 57.301154], [58.865, 57.19556], [58.75, 57.03], [58.70139, 56.93556], [58.71389, 56.82389], [58.89361, 56.62972]],
                 {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_80baec4ad70f9cbe32cbbaf3ba239acc = L.popup({
+        var popup_abaaf68937a1ea268098f28a7d2343d5 = L.popup({
   "maxWidth": "100%",
 });
 
         
             
-                var html_330e71f7ff9cd367beb3c6f15c9478b0 = $(`<div id="html_330e71f7ff9cd367beb3c6f15c9478b0" style="width: 100.0%; height: 100.0%;">р. Косьва (от истока к устью)</div>`)[0];
-                popup_80baec4ad70f9cbe32cbbaf3ba239acc.setContent(html_330e71f7ff9cd367beb3c6f15c9478b0);
+                var html_1467a3bc1ef9e7e9eac2a876352882cc = $(`<div id="html_1467a3bc1ef9e7e9eac2a876352882cc" style="width: 100.0%; height: 100.0%;">р. Косьва</div>`)[0];
+                popup_abaaf68937a1ea268098f28a7d2343d5.setContent(html_1467a3bc1ef9e7e9eac2a876352882cc);
             
         
 
-        poly_line_a07588134434761b4b3f1fdbd668699d.bindPopup(popup_80baec4ad70f9cbe32cbbaf3ba239acc)
+        poly_line_a1633dcb78f51b338b63e7fdd4aefc2a.bindPopup(popup_abaaf68937a1ea268098f28a7d2343d5)
         ;
 
         
     
     
-            var circle_marker_574005b9ee749d53fa5c2edabfa1debe = L.circleMarker(
-                [59.34361, 59.14028],
-                {"bubblingMouseEvents": true, "color": "#ce0000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ce0000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.84863921032937, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            var circle_marker_52b885f6809b4c428cda43247f31be82 = L.circleMarker(
+                [58.8347, 57.787299],
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_3ee34a15d1df46a32ac52987e47295e6 = L.popup({
+        var popup_93d0bf659abd69b174c775b6877635d4 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_4bb3e622bdc36f501677b1364fd7573d = $(`<div id="html_4bb3e622bdc36f501677b1364fd7573d" style="width: 100.0%; height: 100.0%;"><b>Исток</b><br>EC: 5424 мкСм/см<br>Расст. от устья: 283 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_3ee34a15d1df46a32ac52987e47295e6.setContent(html_4bb3e622bdc36f501677b1364fd7573d);
+                var html_758e103b33c4104d139d3646fcb96ace = $(`<div id="html_758e103b33c4104d139d3646fcb96ace" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 153 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_93d0bf659abd69b174c775b6877635d4.setContent(html_758e103b33c4104d139d3646fcb96ace);
             
         
 
-        circle_marker_574005b9ee749d53fa5c2edabfa1debe.bindPopup(popup_3ee34a15d1df46a32ac52987e47295e6)
+        circle_marker_52b885f6809b4c428cda43247f31be82.bindPopup(popup_93d0bf659abd69b174c775b6877635d4)
         ;
 
         
     
     
-            var circle_marker_06d77cf60b2170c6cf83c3735e7b3840 = L.circleMarker(
-                [59.7, 59.0],
-                {"bubblingMouseEvents": true, "color": "#cc0000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cc0000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.88796857989498, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            var circle_marker_b332624b285b88ad71c0fe78036dc8b9 = L.circleMarker(
+                [58.862158, 57.737422],
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_56b666ecda7591b88305b44ca1012373 = L.popup({
+        var popup_93b0981419fa37b2ff4217845106def5 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_e7b31eec08f06cfe3ba8f4e8cbc936b9 = $(`<div id="html_e7b31eec08f06cfe3ba8f4e8cbc936b9" style="width: 100.0%; height: 100.0%;"><b>Малая Косьва (пр)</b><br>EC: 5444 мкСм/см<br>Расст. от устья: 261 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_56b666ecda7591b88305b44ca1012373.setContent(html_e7b31eec08f06cfe3ba8f4e8cbc936b9);
+                var html_8bcd75518dd0eb6004a8de9e8c105e5e = $(`<div id="html_8bcd75518dd0eb6004a8de9e8c105e5e" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 146 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_93b0981419fa37b2ff4217845106def5.setContent(html_8bcd75518dd0eb6004a8de9e8c105e5e);
             
         
 
-        circle_marker_06d77cf60b2170c6cf83c3735e7b3840.bindPopup(popup_56b666ecda7591b88305b44ca1012373)
+        circle_marker_b332624b285b88ad71c0fe78036dc8b9.bindPopup(popup_93b0981419fa37b2ff4217845106def5)
         ;
 
         
     
     
-            var circle_marker_420213a8c275b5a778f0ae189fc769fd = L.circleMarker(
-                [59.65, 58.86667],
-                {"bubblingMouseEvents": true, "color": "#ca0000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ca0000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.911208661911026, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            var circle_marker_76439a6f96ea2a616db6cbf8e2cc97cd = L.circleMarker(
+                [58.84216, 57.680513],
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_6c9c37fce4e218c568b144be321a4b24 = L.popup({
+        var popup_59f20c99231e6d85b91324da1cb6cd1d = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_1fadda32164e551bd6563a46549e50c6 = $(`<div id="html_1fadda32164e551bd6563a46549e50c6" style="width: 100.0%; height: 100.0%;"><b>Тылай (пр)</b><br>EC: 5456 мкСм/см<br>Расст. от устья: 248 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_6c9c37fce4e218c568b144be321a4b24.setContent(html_1fadda32164e551bd6563a46549e50c6);
+                var html_a751af0d97237be57281e5fb30dda482 = $(`<div id="html_a751af0d97237be57281e5fb30dda482" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 138 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_59f20c99231e6d85b91324da1cb6cd1d.setContent(html_a751af0d97237be57281e5fb30dda482);
             
         
 
-        circle_marker_420213a8c275b5a778f0ae189fc769fd.bindPopup(popup_6c9c37fce4e218c568b144be321a4b24)
+        circle_marker_76439a6f96ea2a616db6cbf8e2cc97cd.bindPopup(popup_59f20c99231e6d85b91324da1cb6cd1d)
         ;
 
         
     
     
-            var circle_marker_31bc950eea0d5ffe04f166f3dab2c259 = L.circleMarker(
-                [59.625, 58.83333],
-                {"bubblingMouseEvents": true, "color": "#ca0000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ca0000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.91657175776088, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            var circle_marker_42a3d1ae1c8d673baefbad14f5181767 = L.circleMarker(
+                [58.867325, 57.619516],
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_db200db5bd313d4ed1caed3d1af5a7ca = L.popup({
+        var popup_eb66ad1b212bfc193f05c94b50700e6f = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_eaf86cdc8e00181c453cee7deb5b7424 = $(`<div id="html_eaf86cdc8e00181c453cee7deb5b7424" style="width: 100.0%; height: 100.0%;"><b>Берёзовка (лв)</b><br>EC: 5458 мкСм/см<br>Расст. от устья: 245 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_db200db5bd313d4ed1caed3d1af5a7ca.setContent(html_eaf86cdc8e00181c453cee7deb5b7424);
+                var html_95e55767a9ace4987f3a9ad7cc7763ab = $(`<div id="html_95e55767a9ace4987f3a9ad7cc7763ab" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 129 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_eb66ad1b212bfc193f05c94b50700e6f.setContent(html_95e55767a9ace4987f3a9ad7cc7763ab);
             
         
 
-        circle_marker_31bc950eea0d5ffe04f166f3dab2c259.bindPopup(popup_db200db5bd313d4ed1caed3d1af5a7ca)
+        circle_marker_42a3d1ae1c8d673baefbad14f5181767.bindPopup(popup_eb66ad1b212bfc193f05c94b50700e6f)
         ;
 
         
     
     
-            var circle_marker_f99883dbcb7fb3cae6f644076b63e3d1 = L.circleMarker(
-                [59.6, 58.8],
-                {"bubblingMouseEvents": true, "color": "#c90000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c90000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.932661045310454, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            var circle_marker_e0df62d92215e69b37a2962cbc7f35c4 = L.circleMarker(
+                [58.860082, 57.603784],
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_37ebae87d4fa7c3997655b8f32473334 = L.popup({
+        var popup_f6efebdf5a613bfaea308eee8b401f6f = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_e9c15cfadb5a1409af7ece708585fd4f = $(`<div id="html_e9c15cfadb5a1409af7ece708585fd4f" style="width: 100.0%; height: 100.0%;"><b>Кырья (лв)</b><br>EC: 5466 мкСм/см<br>Расст. от устья: 236 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_37ebae87d4fa7c3997655b8f32473334.setContent(html_e9c15cfadb5a1409af7ece708585fd4f);
+                var html_b8f7582437248f70a7c4f1a71caf846d = $(`<div id="html_b8f7582437248f70a7c4f1a71caf846d" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 126 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_f6efebdf5a613bfaea308eee8b401f6f.setContent(html_b8f7582437248f70a7c4f1a71caf846d);
             
         
 
-        circle_marker_f99883dbcb7fb3cae6f644076b63e3d1.bindPopup(popup_37ebae87d4fa7c3997655b8f32473334)
+        circle_marker_e0df62d92215e69b37a2962cbc7f35c4.bindPopup(popup_f6efebdf5a613bfaea308eee8b401f6f)
         ;
 
         
     
     
-            var circle_marker_d0ed4635b1ff177054ce42e080918ed0 = L.circleMarker(
-                [59.55, 58.7],
-                {"bubblingMouseEvents": true, "color": "#c90000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c90000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.943387237010164, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            var circle_marker_ad40cadf9c60b6740a0aa81be32895e9 = L.circleMarker(
+                [58.863659, 57.565159],
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_22a5f9b2ee59851bea929673afd70258 = L.popup({
+        var popup_33735a537178327cf33cd96f06a614f1 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_51418d8ae75db303ede026ebed5b6914 = $(`<div id="html_51418d8ae75db303ede026ebed5b6914" style="width: 100.0%; height: 100.0%;"><b>Тыпыл (пр)</b><br>EC: 5472 мкСм/см<br>Расст. от устья: 230 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_22a5f9b2ee59851bea929673afd70258.setContent(html_51418d8ae75db303ede026ebed5b6914);
+                var html_f85868511802477756ea88b764646396 = $(`<div id="html_f85868511802477756ea88b764646396" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 120 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_33735a537178327cf33cd96f06a614f1.setContent(html_f85868511802477756ea88b764646396);
             
         
 
-        circle_marker_d0ed4635b1ff177054ce42e080918ed0.bindPopup(popup_22a5f9b2ee59851bea929673afd70258)
+        circle_marker_ad40cadf9c60b6740a0aa81be32895e9.bindPopup(popup_33735a537178327cf33cd96f06a614f1)
         ;
 
         
     
     
-            var circle_marker_6fabe5d7211297fee5a6e8284a46cd9a = L.circleMarker(
-                [59.5, 58.6],
-                {"bubblingMouseEvents": true, "color": "#c80000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c80000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.952325730093257, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            var circle_marker_0e2d90cfc09411904d6570dcc9a84080 = L.circleMarker(
+                [58.865223, 57.485752],
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_8967dda25af727500cd4a2f9acdecb2c = L.popup({
+        var popup_f7cecfe1aff7be6a887c45539cc75f29 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_e174e54131b6a4d8fcf8ecb659046701 = $(`<div id="html_e174e54131b6a4d8fcf8ecb659046701" style="width: 100.0%; height: 100.0%;"><b>Каменка (лв)</b><br>EC: 5476 мкСм/см<br>Расст. от устья: 225 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_8967dda25af727500cd4a2f9acdecb2c.setContent(html_e174e54131b6a4d8fcf8ecb659046701);
+                var html_6f2742ec1b73ec8c166edc015709aa6f = $(`<div id="html_6f2742ec1b73ec8c166edc015709aa6f" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 108 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_f7cecfe1aff7be6a887c45539cc75f29.setContent(html_6f2742ec1b73ec8c166edc015709aa6f);
             
         
 
-        circle_marker_6fabe5d7211297fee5a6e8284a46cd9a.bindPopup(popup_8967dda25af727500cd4a2f9acdecb2c)
+        circle_marker_0e2d90cfc09411904d6570dcc9a84080.bindPopup(popup_f7cecfe1aff7be6a887c45539cc75f29)
         ;
 
         
     
     
-            var circle_marker_957f5ef9c2e63d27352543d57ade180a = L.circleMarker(
-                [59.41667, 58.43333],
-                {"bubblingMouseEvents": true, "color": "#c60000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c60000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.99165509965887, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            var circle_marker_f3d6864b7b058f3dfe228ecd3c411363 = L.circleMarker(
+                [58.873514, 57.463347],
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_953904bace3093b1ccf1794566f716cd = L.popup({
+        var popup_302d0c2f52e6fcda385b062b7793d6a7 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_059dd6c798865c72060992318193362c = $(`<div id="html_059dd6c798865c72060992318193362c" style="width: 100.0%; height: 100.0%;"><b>Пашковка (пр)</b><br>EC: 5496 мкСм/см<br>Расст. от устья: 203 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_953904bace3093b1ccf1794566f716cd.setContent(html_059dd6c798865c72060992318193362c);
+                var html_d7f4c36e1508b3037a07cd5bea4aaa21 = $(`<div id="html_d7f4c36e1508b3037a07cd5bea4aaa21" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 104 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_302d0c2f52e6fcda385b062b7793d6a7.setContent(html_d7f4c36e1508b3037a07cd5bea4aaa21);
             
         
 
-        circle_marker_957f5ef9c2e63d27352543d57ade180a.bindPopup(popup_953904bace3093b1ccf1794566f716cd)
+        circle_marker_f3d6864b7b058f3dfe228ecd3c411363.bindPopup(popup_302d0c2f52e6fcda385b062b7793d6a7)
         ;
 
         
     
     
-            var circle_marker_5dd857d4b72592a97ddb0485652a1f9c = L.circleMarker(
-                [59.4, 58.4],
-                {"bubblingMouseEvents": true, "color": "#c60000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c60000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.995230496892106, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            var circle_marker_7c26c6a47f8a5ffc4a1a173ad925949b = L.circleMarker(
+                [58.845389, 57.415916],
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_919c5150e4bfe0804cf95c8ae782ff4d = L.popup({
+        var popup_17cb66f4d00b0ecfb3285f72fd4b733b = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_9d752c59743a7ba8380f53fe0484f9fd = $(`<div id="html_9d752c59743a7ba8380f53fe0484f9fd" style="width: 100.0%; height: 100.0%;"><b>Тулумка (лв)</b><br>EC: 5498 мкСм/см<br>Расст. от устья: 201 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_919c5150e4bfe0804cf95c8ae782ff4d.setContent(html_9d752c59743a7ba8380f53fe0484f9fd);
+                var html_51a99ff56a94eccdb57bd8825008ff28 = $(`<div id="html_51a99ff56a94eccdb57bd8825008ff28" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 96 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_17cb66f4d00b0ecfb3285f72fd4b733b.setContent(html_51a99ff56a94eccdb57bd8825008ff28);
             
         
 
-        circle_marker_5dd857d4b72592a97ddb0485652a1f9c.bindPopup(popup_919c5150e4bfe0804cf95c8ae782ff4d)
+        circle_marker_7c26c6a47f8a5ffc4a1a173ad925949b.bindPopup(popup_17cb66f4d00b0ecfb3285f72fd4b733b)
         ;
 
         
     
     
-            var circle_marker_1fa494cf247902eee6de3ad1ebe6ff10 = L.circleMarker(
-                [59.325, 58.25],
-                {"bubblingMouseEvents": true, "color": "#c40000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c40000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.01489518167491, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            var circle_marker_860b0caa1ce6c103a05baf96e36c4087 = L.circleMarker(
+                [58.823152, 57.410374],
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_f7ade2131fb37f39439cf3a4c2d0a5b5 = L.popup({
+        var popup_bd7bf8b5ea93c172f5ca057455e0d157 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_ad898a5b1f9d3db2d0612bd561797f4b = $(`<div id="html_ad898a5b1f9d3db2d0612bd561797f4b" style="width: 100.0%; height: 100.0%;"><b>Берёзовка (пр)</b><br>EC: 5507 мкСм/см<br>Расст. от устья: 190 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_f7ade2131fb37f39439cf3a4c2d0a5b5.setContent(html_ad898a5b1f9d3db2d0612bd561797f4b);
+                var html_47188191932dfbc4135ca83bc18627fa = $(`<div id="html_47188191932dfbc4135ca83bc18627fa" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 95 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_bd7bf8b5ea93c172f5ca057455e0d157.setContent(html_47188191932dfbc4135ca83bc18627fa);
             
         
 
-        circle_marker_1fa494cf247902eee6de3ad1ebe6ff10.bindPopup(popup_f7ade2131fb37f39439cf3a4c2d0a5b5)
+        circle_marker_860b0caa1ce6c103a05baf96e36c4087.bindPopup(popup_bd7bf8b5ea93c172f5ca057455e0d157)
         ;
 
         
     
     
-            var circle_marker_1fb578ac55d246146645492c9df6c598 = L.circleMarker(
-                [59.3, 58.21667],
-                {"bubblingMouseEvents": true, "color": "#c40000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c40000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.02204597614139, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            var circle_marker_8953651f72bb108ab152b54b2647483a = L.circleMarker(
+                [58.808828, 57.378816],
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_4914eca7c0818035b8c71c44de32edbb = L.popup({
+        var popup_733f38db91d3d1cb75ae8237d6ae3f56 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_76e32045e293c519a4196b08d080505f = $(`<div id="html_76e32045e293c519a4196b08d080505f" style="width: 100.0%; height: 100.0%;"><b>Малая Ослянка (лв)</b><br>EC: 5511 мкСм/см<br>Расст. от устья: 186 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_4914eca7c0818035b8c71c44de32edbb.setContent(html_76e32045e293c519a4196b08d080505f);
+                var html_9a4d03a90ce05a1e2e3735ae94f88e5f = $(`<div id="html_9a4d03a90ce05a1e2e3735ae94f88e5f" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 90 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_733f38db91d3d1cb75ae8237d6ae3f56.setContent(html_9a4d03a90ce05a1e2e3735ae94f88e5f);
             
         
 
-        circle_marker_1fb578ac55d246146645492c9df6c598.bindPopup(popup_4914eca7c0818035b8c71c44de32edbb)
+        circle_marker_8953651f72bb108ab152b54b2647483a.bindPopup(popup_733f38db91d3d1cb75ae8237d6ae3f56)
         ;
 
         
     
     
-            var circle_marker_47f196abe4c2877b76b87d83a21da03e = L.circleMarker(
-                [59.275, 58.18333],
-                {"bubblingMouseEvents": true, "color": "#c30000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c30000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.036347565074337, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            var circle_marker_a8394b308c44b4b138488f14a24df2a9 = L.circleMarker(
+                [58.838695, 57.326353],
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_6a28a6315a338815719228fceeb18a47 = L.popup({
+        var popup_8f50b954894c44654adff35f14e7b311 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_27a46212bf03ecdd1f15d09fd149fc50 = $(`<div id="html_27a46212bf03ecdd1f15d09fd149fc50" style="width: 100.0%; height: 100.0%;"><b>Большая Ослянка (лв)</b><br>EC: 5518 мкСм/см<br>Расст. от устья: 178 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_6a28a6315a338815719228fceeb18a47.setContent(html_27a46212bf03ecdd1f15d09fd149fc50);
+                var html_38becc5e68fafe444671c65323012d53 = $(`<div id="html_38becc5e68fafe444671c65323012d53" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 82 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_8f50b954894c44654adff35f14e7b311.setContent(html_38becc5e68fafe444671c65323012d53);
             
         
 
-        circle_marker_47f196abe4c2877b76b87d83a21da03e.bindPopup(popup_6a28a6315a338815719228fceeb18a47)
+        circle_marker_a8394b308c44b4b138488f14a24df2a9.bindPopup(popup_8f50b954894c44654adff35f14e7b311)
         ;
 
         
     
     
-            var circle_marker_e2e3c537cc3f45301d6f48dde3b4604f = L.circleMarker(
-                [59.20833, 58.01667],
-                {"bubblingMouseEvents": true, "color": "#c20000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c20000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.063163044323616, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            var circle_marker_6acc13624dc84b68e634ed7833f83b78 = L.circleMarker(
+                [58.825701, 57.301154],
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_704b92666a705501e0bbcb7c32f6121b = L.popup({
+        var popup_09da5d3af7a30e8474a75d665656f40d = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_174f1b354ae3d17a4bc449597c007184 = $(`<div id="html_174f1b354ae3d17a4bc449597c007184" style="width: 100.0%; height: 100.0%;"><b>Сухая (лв)</b><br>EC: 5532 мкСм/см<br>Расст. от устья: 163 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_704b92666a705501e0bbcb7c32f6121b.setContent(html_174f1b354ae3d17a4bc449597c007184);
+                var html_210b503eb5245ff95fa539c2ef25c11a = $(`<div id="html_210b503eb5245ff95fa539c2ef25c11a" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 76 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_09da5d3af7a30e8474a75d665656f40d.setContent(html_210b503eb5245ff95fa539c2ef25c11a);
             
         
 
-        circle_marker_e2e3c537cc3f45301d6f48dde3b4604f.bindPopup(popup_704b92666a705501e0bbcb7c32f6121b)
+        circle_marker_6acc13624dc84b68e634ed7833f83b78.bindPopup(popup_09da5d3af7a30e8474a75d665656f40d)
         ;
 
         
     
     
-            var circle_marker_eec2af525db24c1875ff650d61c2a270 = L.circleMarker(
-                [59.125, 57.8],
-                {"bubblingMouseEvents": true, "color": "#c00000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c00000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.08819082495628, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
-        
-    
-        var popup_dc44f1b79f1ce5737f12f0d39f907545 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_7344139798c9ca088b75b31e608969b3 = $(`<div id="html_7344139798c9ca088b75b31e608969b3" style="width: 100.0%; height: 100.0%;"><b>Таскаиха (пр)</b><br>EC: 5544 мкСм/см<br>Расст. от устья: 149 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_dc44f1b79f1ce5737f12f0d39f907545.setContent(html_7344139798c9ca088b75b31e608969b3);
-            
-        
-
-        circle_marker_eec2af525db24c1875ff650d61c2a270.bindPopup(popup_dc44f1b79f1ce5737f12f0d39f907545)
-        ;
-
-        
-    
-    
-            var circle_marker_ceb229b93f15b8e27a72d05c356fd503 = L.circleMarker(
-                [59.04167, 57.61667],
-                {"bubblingMouseEvents": true, "color": "#be0000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#be0000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.11679400282218, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
-        
-    
-        var popup_0f89105ac07ed2401c7ffba2dfc9c95a = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_d3828c5c7e1d0c7a37864be359f26e4e = $(`<div id="html_d3828c5c7e1d0c7a37864be359f26e4e" style="width: 100.0%; height: 100.0%;"><b>Няр (пр)</b><br>EC: 5558 мкСм/см<br>Расст. от устья: 133 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_0f89105ac07ed2401c7ffba2dfc9c95a.setContent(html_d3828c5c7e1d0c7a37864be359f26e4e);
-            
-        
-
-        circle_marker_ceb229b93f15b8e27a72d05c356fd503.bindPopup(popup_0f89105ac07ed2401c7ffba2dfc9c95a)
-        ;
-
-        
-    
-    
-            var circle_marker_07bdd25e57026a86d1d073f46e7cc062 = L.circleMarker(
-                [59.01667, 57.56667],
-                {"bubblingMouseEvents": true, "color": "#bd0000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bd0000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.136458687604986, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
-        
-    
-        var popup_eb333a16fcaff8817343011011ac5d47 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_f92b483269806802851e8c46dc0b2461 = $(`<div id="html_f92b483269806802851e8c46dc0b2461" style="width: 100.0%; height: 100.0%;"><b>Нюр (пр)</b><br>EC: 5568 мкСм/см<br>Расст. от устья: 122 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_eb333a16fcaff8817343011011ac5d47.setContent(html_f92b483269806802851e8c46dc0b2461);
-            
-        
-
-        circle_marker_07bdd25e57026a86d1d073f46e7cc062.bindPopup(popup_eb333a16fcaff8817343011011ac5d47)
-        ;
-
-        
-    
-    
-            var circle_marker_ddf70bd83dc275f59d4b93c0dda25913 = L.circleMarker(
-                [58.93111, 57.38139],
-                {"bubblingMouseEvents": true, "color": "#ba0000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ba0000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.19724044057002, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
-        
-    
-        var popup_fd3d9cedef2058e182ff9e8b4053d1ee = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_e046a30076040c638e70d9f4a13140ad = $(`<div id="html_e046a30076040c638e70d9f4a13140ad" style="width: 100.0%; height: 100.0%;"><b>Ладейный Лог (лв)</b><br>EC: 5599 мкСм/см<br>Расст. от устья: 88 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_fd3d9cedef2058e182ff9e8b4053d1ee.setContent(html_e046a30076040c638e70d9f4a13140ad);
-            
-        
-
-        circle_marker_ddf70bd83dc275f59d4b93c0dda25913.bindPopup(popup_fd3d9cedef2058e182ff9e8b4053d1ee)
-        ;
-
-        
-    
-    
-            var circle_marker_aa0611afa9cfbc86a54b37720c8aa387 = L.circleMarker(
-                [58.93056, 57.38028],
-                {"bubblingMouseEvents": true, "color": "#ba0000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ba0000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.19724044057002, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
-        
-    
-        var popup_ac9cf05c55461fa3e12a3ef10a837ac4 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_9954b46b70aa0658682017333f4b89d4 = $(`<div id="html_9954b46b70aa0658682017333f4b89d4" style="width: 100.0%; height: 100.0%;"><b>Губашка (пр)</b><br>EC: 5599 мкСм/см<br>Расст. от устья: 88 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_ac9cf05c55461fa3e12a3ef10a837ac4.setContent(html_9954b46b70aa0658682017333f4b89d4);
-            
-        
-
-        circle_marker_aa0611afa9cfbc86a54b37720c8aa387.bindPopup(popup_ac9cf05c55461fa3e12a3ef10a837ac4)
-        ;
-
-        
-    
-    
-            var circle_marker_d00bab6b271462c6ea4e07e5997ec63e = L.circleMarker(
-                [58.925, 57.37194],
-                {"bubblingMouseEvents": true, "color": "#b90000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b90000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.204391235036496, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
-        
-    
-        var popup_de4987783c9436f990b882eea47e1be4 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_edc692de5e2ec6f14c29335edd52b393 = $(`<div id="html_edc692de5e2ec6f14c29335edd52b393" style="width: 100.0%; height: 100.0%;"><b>Косая (пр)</b><br>EC: 5602 мкСм/см<br>Расст. от устья: 84 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_de4987783c9436f990b882eea47e1be4.setContent(html_edc692de5e2ec6f14c29335edd52b393);
-            
-        
-
-        circle_marker_d00bab6b271462c6ea4e07e5997ec63e.bindPopup(popup_de4987783c9436f990b882eea47e1be4)
-        ;
-
-        
-    
-    
-            var circle_marker_bee8c202d592726531dc5d6e1158c701 = L.circleMarker(
-                [58.92139, 57.3625],
-                {"bubblingMouseEvents": true, "color": "#b90000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b90000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.207966632269734, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
-        
-    
-        var popup_be94c5ea2932d509dbd4514ebffef59d = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_c6067ebddf988666d1d2272ee8b30470 = $(`<div id="html_c6067ebddf988666d1d2272ee8b30470" style="width: 100.0%; height: 100.0%;"><b>Берестянка (Каменка, лв)</b><br>EC: 5604 мкСм/см<br>Расст. от устья: 82 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_be94c5ea2932d509dbd4514ebffef59d.setContent(html_c6067ebddf988666d1d2272ee8b30470);
-            
-        
-
-        circle_marker_bee8c202d592726531dc5d6e1158c701.bindPopup(popup_be94c5ea2932d509dbd4514ebffef59d)
-        ;
-
-        
-    
-    
-            var circle_marker_341647cfc7345393faec3f5ae0677219 = L.circleMarker(
-                [58.91528, 57.34806],
-                {"bubblingMouseEvents": true, "color": "#b90000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b90000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.21511742673621, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
-        
-    
-        var popup_29b8b1cff3e88aa5593a40688f1e35b5 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_234aba40079c58de1e5e84fe03cd1960 = $(`<div id="html_234aba40079c58de1e5e84fe03cd1960" style="width: 100.0%; height: 100.0%;"><b>Нижняя Мальцевка (лв)</b><br>EC: 5608 мкСм/см<br>Расст. от устья: 78 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_29b8b1cff3e88aa5593a40688f1e35b5.setContent(html_234aba40079c58de1e5e84fe03cd1960);
-            
-        
-
-        circle_marker_341647cfc7345393faec3f5ae0677219.bindPopup(popup_29b8b1cff3e88aa5593a40688f1e35b5)
-        ;
-
-        
-    
-    
-            var circle_marker_9457a495e7282945034f29ee8761f338 = L.circleMarker(
-                [58.89722, 57.28472],
-                {"bubblingMouseEvents": true, "color": "#b80000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b80000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.231206714285776, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
-        
-    
-        var popup_de5ca1243c0821b540dbb7bbe15a5f05 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_9de0234d81a7c68b3fa832e5150d3a74 = $(`<div id="html_9de0234d81a7c68b3fa832e5150d3a74" style="width: 100.0%; height: 100.0%;"><b>Вива (лв)</b><br>EC: 5616 мкСм/см<br>Расст. от устья: 69 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_de5ca1243c0821b540dbb7bbe15a5f05.setContent(html_9de0234d81a7c68b3fa832e5150d3a74);
-            
-        
-
-        circle_marker_9457a495e7282945034f29ee8761f338.bindPopup(popup_de5ca1243c0821b540dbb7bbe15a5f05)
-        ;
-
-        
-    
-    
-            var circle_marker_5dab46245e29171e82660f61046ed09a = L.circleMarker(
+            var circle_marker_be41c673e4cf255be54e8189a05a9e80 = L.circleMarker(
                 [58.865, 57.19556],
-                {"bubblingMouseEvents": true, "color": "#b60000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b60000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.25802219353506, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_f5d4a6be0b5d0520fb212a3a96c51dab = L.popup({
+        var popup_72356f829fc0d279701dd64b01423215 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_bd95dfb61b8e93b68a4ba96ac9acea56 = $(`<div id="html_bd95dfb61b8e93b68a4ba96ac9acea56" style="width: 100.0%; height: 100.0%;"><b>Понылка (пр)</b><br>EC: 5629 мкСм/см<br>Расст. от устья: 54 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_f5d4a6be0b5d0520fb212a3a96c51dab.setContent(html_bd95dfb61b8e93b68a4ba96ac9acea56);
+                var html_7d60dd92edde3c0e09c733c8b554c485 = $(`<div id="html_7d60dd92edde3c0e09c733c8b554c485" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 54 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_72356f829fc0d279701dd64b01423215.setContent(html_7d60dd92edde3c0e09c733c8b554c485);
             
         
 
-        circle_marker_5dab46245e29171e82660f61046ed09a.bindPopup(popup_f5d4a6be0b5d0520fb212a3a96c51dab)
+        circle_marker_be41c673e4cf255be54e8189a05a9e80.bindPopup(popup_72356f829fc0d279701dd64b01423215)
         ;
 
         
     
     
-            var circle_marker_cd36d82d0392fa4728f3b25a5baa9ab5 = L.circleMarker(
+            var circle_marker_6663b3c0c179cb142a0f274863a46028 = L.circleMarker(
                 [58.75, 57.03],
-                {"bubblingMouseEvents": true, "color": "#b40000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b40000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.29556386448405, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_186f89f7b94ff8544a918567cb52ac0a = L.popup({
+        var popup_fd141a3896c7a2dea76cf084b5a16d33 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_1268dd5f037c5bdcafc1731edb7fc389 = $(`<div id="html_1268dd5f037c5bdcafc1731edb7fc389" style="width: 100.0%; height: 100.0%;"><b>Ключанка (лв)</b><br>EC: 5648 мкСм/см<br>Расст. от устья: 33 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_186f89f7b94ff8544a918567cb52ac0a.setContent(html_1268dd5f037c5bdcafc1731edb7fc389);
+                var html_1f7a86736e690a920fcef1a72733f0e2 = $(`<div id="html_1f7a86736e690a920fcef1a72733f0e2" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 33 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_fd141a3896c7a2dea76cf084b5a16d33.setContent(html_1f7a86736e690a920fcef1a72733f0e2);
             
         
 
-        circle_marker_cd36d82d0392fa4728f3b25a5baa9ab5.bindPopup(popup_186f89f7b94ff8544a918567cb52ac0a)
+        circle_marker_6663b3c0c179cb142a0f274863a46028.bindPopup(popup_fd141a3896c7a2dea76cf084b5a16d33)
         ;
 
         
     
     
-            var circle_marker_4c77eaf7fb7c886bc185e0003a82a591 = L.circleMarker(
+            var circle_marker_d11b5924e1d9fa163443ffa33170c4ec = L.circleMarker(
                 [58.70139, 56.93556],
-                {"bubblingMouseEvents": true, "color": "#b30000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b30000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.31165315203362, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_3e28df48232555e7552cabfabdeae985 = L.popup({
+        var popup_ff5899d89415696b1bfff1ea7627d30f = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_a60fa078ffb55cc6a39d90d34cd51ac0 = $(`<div id="html_a60fa078ffb55cc6a39d90d34cd51ac0" style="width: 100.0%; height: 100.0%;"><b>Вильва (лв)</b><br>EC: 5656 мкСм/см<br>Расст. от устья: 24 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_3e28df48232555e7552cabfabdeae985.setContent(html_a60fa078ffb55cc6a39d90d34cd51ac0);
+                var html_fae3d361b0a50941631c980b8eef6108 = $(`<div id="html_fae3d361b0a50941631c980b8eef6108" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 24 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_ff5899d89415696b1bfff1ea7627d30f.setContent(html_fae3d361b0a50941631c980b8eef6108);
             
         
 
-        circle_marker_4c77eaf7fb7c886bc185e0003a82a591.bindPopup(popup_3e28df48232555e7552cabfabdeae985)
+        circle_marker_d11b5924e1d9fa163443ffa33170c4ec.bindPopup(popup_ff5899d89415696b1bfff1ea7627d30f)
         ;
 
         
     
     
-            var circle_marker_0af4fd63c330b5e6ed555b88173631cc = L.circleMarker(
+            var circle_marker_d82d880b6da262ad5e532279ce11f67e = L.circleMarker(
                 [58.71389, 56.82389],
-                {"bubblingMouseEvents": true, "color": "#b20000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b20000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.32416704234995, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+                {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_2e5b94d00758b9b19a68974830e28051 = L.popup({
+        var popup_8b446eb843136b99d088db9b1e5dd9ad = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_ce87830e8a57ff1de259bc9f0a16fdd0 = $(`<div id="html_ce87830e8a57ff1de259bc9f0a16fdd0" style="width: 100.0%; height: 100.0%;"><b>Пожва (пр)</b><br>EC: 5662 мкСм/см<br>Расст. от устья: 17 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_2e5b94d00758b9b19a68974830e28051.setContent(html_ce87830e8a57ff1de259bc9f0a16fdd0);
+                var html_50f25da41b04645ffbbf4edabbfe67a7 = $(`<div id="html_50f25da41b04645ffbbf4edabbfe67a7" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 17 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_8b446eb843136b99d088db9b1e5dd9ad.setContent(html_50f25da41b04645ffbbf4edabbfe67a7);
             
         
 
-        circle_marker_0af4fd63c330b5e6ed555b88173631cc.bindPopup(popup_2e5b94d00758b9b19a68974830e28051)
+        circle_marker_d82d880b6da262ad5e532279ce11f67e.bindPopup(popup_8b446eb843136b99d088db9b1e5dd9ad)
         ;
 
         
     
     
-            var circle_marker_dc9afccad679a7a38f26b23e0d5d76da = L.circleMarker(
+            var circle_marker_360f823588e58916112e3828d76cb632 = L.circleMarker(
                 [58.89361, 56.62972],
                 {"bubblingMouseEvents": true, "color": "#b10000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b10000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.35455791883247, "stroke": true, "weight": 3}
-            ).addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            ).addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
     
-        var popup_1a53298ab072ab9ffa202a62b4076070 = L.popup({
+        var popup_10c716e111e23f5ba2a6691200b35ad1 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_a69212b2026c2df521e94653a92e7cf0 = $(`<div id="html_a69212b2026c2df521e94653a92e7cf0" style="width: 100.0%; height: 100.0%;"><b>Устье (Кама)</b><br>EC: 5677 мкСм/см<br>Расст. от устья: 0 км<br>Статус: ⚠️ ОПАСНО</div>`)[0];
-                popup_1a53298ab072ab9ffa202a62b4076070.setContent(html_a69212b2026c2df521e94653a92e7cf0);
+                var html_815c21fa9ce36388ca0536d85f2f30c1 = $(`<div id="html_815c21fa9ce36388ca0536d85f2f30c1" style="width: 100.0%; height: 100.0%;"><b></b><br>EC: 5677 мкСм/см<br>Расст. от устья: 0 км<br>Статус: ОПАСНО</div>`)[0];
+                popup_10c716e111e23f5ba2a6691200b35ad1.setContent(html_815c21fa9ce36388ca0536d85f2f30c1);
             
         
 
-        circle_marker_dc9afccad679a7a38f26b23e0d5d76da.bindPopup(popup_1a53298ab072ab9ffa202a62b4076070)
+        circle_marker_360f823588e58916112e3828d76cb632.bindPopup(popup_10c716e111e23f5ba2a6691200b35ad1)
         ;
 
         
     
     
-            var heat_map_0e777475ca0014dd3a8926923a21d932 = L.heatLayer(
-                [[59.34361, 59.14028, 0.9040532675274476], [59.7, 59.0, 0.9073307149912486], [59.65, 58.86667, 0.9092673884925856], [59.625, 58.83333, 0.9097143131467401], [59.6, 58.8, 0.9110550871092042], [59.55, 58.7, 0.9119489364175135], [59.5, 58.6, 0.9126938108411047], [59.41667, 58.43333, 0.9159712583049057], [59.4, 58.4, 0.9162692080743421], [59.325, 58.25, 0.9179079318062425], [59.3, 58.21667, 0.9185038313451156], [59.275, 58.18333, 0.9196956304228614], [59.20833, 58.01667, 0.9219302536936348], [59.125, 57.8, 0.9240159020796899], [59.04167, 57.61667, 0.9263995002351815], [59.01667, 57.56667, 0.9280382239670819], [58.93111, 57.38139, 0.9331033700475018], [58.93056, 57.38028, 0.9331033700475018], [58.925, 57.37194, 0.9336992695863746], [58.92139, 57.3625, 0.9339972193558111], [58.91528, 57.34806, 0.9345931188946841], [58.89722, 57.28472, 0.935933892857148], [58.865, 57.19556, 0.9381685161279215], [58.75, 57.03, 0.9412969887070041], [58.70139, 56.93556, 0.9426377626694683], [58.71389, 56.82389, 0.9436805868624959], [58.89361, 56.62972, 0.9462131599027057]],
+            var heat_map_4be8fbca138964aac9cd49926e1a1db2 = L.heatLayer(
+                [[58.8347, 57.787299, 0.9462131599027057], [58.862158, 57.737422, 0.9462131599027057], [58.84216, 57.680513, 0.9462131599027057], [58.867325, 57.619516, 0.9462131599027057], [58.860082, 57.603784, 0.9462131599027057], [58.863659, 57.565159, 0.9462131599027057], [58.865223, 57.485752, 0.9462131599027057], [58.873514, 57.463347, 0.9462131599027057], [58.845389, 57.415916, 0.9462131599027057], [58.823152, 57.410374, 0.9462131599027057], [58.808828, 57.378816, 0.9462131599027057], [58.838695, 57.326353, 0.9462131599027057], [58.825701, 57.301154, 0.9462131599027057], [58.865, 57.19556, 0.9462131599027057], [58.75, 57.03, 0.9462131599027057], [58.70139, 56.93556, 0.9462131599027057], [58.71389, 56.82389, 0.9462131599027057], [58.89361, 56.62972, 0.9462131599027057]],
                 {
   "minOpacity": 0.3,
   "maxZoom": 18,
@@ -809,7 +602,7 @@
             );
         
     
-            heat_map_0e777475ca0014dd3a8926923a21d932.addTo(map_a66f9b415bd32f40dd324a588a27de5f);
+            heat_map_4be8fbca138964aac9cd49926e1a1db2.addTo(map_0c117171fe2c297bb4c231fc9fceff86);
         
 </script>
 </html>

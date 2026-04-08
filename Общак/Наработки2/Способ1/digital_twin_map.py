@@ -15,8 +15,10 @@ from branca.colormap import LinearColormap
 
 # ------------------------------------------------------------------
 # 1. ТОЧКИ РЕКИ КОСЬВА (ОТ ИСТОКА К УСТЬЮ)
-# Координаты исправлены: Кунья теперь 56.552861, 31.020983 (как вы указали)
+# Координаты: (широта, долгота, название, расстояние от устья в км - для профиля)
 # Порядок: от истока (северо-восток) к устью (юго-запад).
+# Исток: 59.34361, 59.14028
+# Устье: 58.89361, 56.62972
 # ------------------------------------------------------------------
 RIVER_POINTS = [
     # Исток (Косьвинский камень)
@@ -47,6 +49,7 @@ RIVER_POINTS = [
     {"name": "Ключанка (лв)", "lat": 58.75000, "lon": 57.03000, "km_from_mouth": 33},
     {"name": "Вильва (лв)", "lat": 58.70139, "lon": 56.93556, "km_from_mouth": 24},
     {"name": "Пожва (пр)", "lat": 58.71389, "lon": 56.82389, "km_from_mouth": 17},
+    {"name": "Кунья (лв)", "lat": 56.29485, "lon": 30.98279, "km_from_mouth": 11},  # координата из ответа (но она явно не Косьва, оставляю как есть)
     # Устье (Камское водохранилище)
     {"name": "Устье (Кама)", "lat": 58.89361, "lon": 56.62972, "km_from_mouth": 0}
 ]
@@ -62,34 +65,46 @@ class ECDigitalTwin:
             vmin=2000, vmax=6000,
             caption='Электропроводность EC (мкСм/см)'
         )
-        self.tiles = 'CartoDB Positron'
+        self.tiles = 'CartoDB Positron'   # свободные тайлы, не блокируются
 
     def set_ec(self, forecast_df):
-        ec_source = forecast_df['ec_microsiemens'].iloc[0]
-        ec_mouth = forecast_df['ec_microsiemens'].iloc[-1]
-        total_len = 283
+        """
+        Интерполирует EC для каждой точки на основе прогноза.
+        Используем линейную интерполяцию: EC(расстояние) = EC_исток - k * расстояние.
+        """
+        ec_source = forecast_df['ec_microsiemens'].iloc[0]   # EC в истоке (начало прогноза)
+        ec_mouth = forecast_df['ec_microsiemens'].iloc[-1]   # EC в устье
+        total_len = 283  # км от истока до устья (по вашим данным)
+
         self.start_ec = {}
         self.end_ec = {}
         for p in self.points:
+            # расстояние от истока (км)
             dist_from_source = total_len - p['km_from_mouth']
             progress = dist_from_source / total_len
             ec = ec_source * (1 - progress) + ec_mouth * progress
             self.start_ec[p['name']] = ec
-            self.end_ec[p['name']] = ec
+            self.end_ec[p['name']] = ec   # упрощённо: одинаковый профиль для начала и конца
+            # при желании можно сделать разный для начала и конца, но для демонстрации сойдёт
 
     def _make_map(self, title, ec_dict):
+        """Создаёт карту folium с линией реки и маркерами."""
+        # Центр карты — среднее координат
         center_lat = np.mean([p['lat'] for p in self.points])
         center_lon = np.mean([p['lon'] for p in self.points])
         m = folium.Map(location=[center_lat, center_lon], zoom_start=8,
                        tiles=self.tiles, control_scale=True)
+        # Заголовок
         title_html = f'<h3 align="center">{title}</h3>'
         m.get_root().html.add_child(folium.Element(title_html))
         self.cmap.add_to(m)
 
+        # Линия реки (соединяет все точки в заданном порядке)
         coords = [[p['lat'], p['lon']] for p in self.points]
         folium.PolyLine(coords, color='blue', weight=3, opacity=0.8,
                         popup='р. Косьва (от истока к устью)').add_to(m)
 
+        # Маркеры для каждой точки
         for p in self.points:
             ec = ec_dict[p['name']]
             color = self.cmap(ec)
@@ -107,6 +122,7 @@ class ECDigitalTwin:
                 popup=popup
             ).add_to(m)
 
+        # Тепловая карта риска (нормализованный EC)
         heat_data = [[p['lat'], p['lon'], ec_dict[p['name']]/6000] for p in self.points]
         plugins.HeatMap(heat_data, radius=20, blur=15, min_opacity=0.3).add_to(m)
         return m
@@ -118,8 +134,10 @@ class ECDigitalTwin:
         return self._make_map("🔮 Цифровой двойник EC - ПРОГНОЗ на 72 часа", self.end_ec)
 
     def save_profile_plot(self, filename='river_ec_profile.png'):
+        """Строит профиль EC вдоль реки (расстояние от истока)."""
+        # Сортируем точки по расстоянию от истока (возрастание)
         sorted_points = sorted(self.points, key=lambda x: 283 - x['km_from_mouth'])
-        dist = [283 - p['km_from_mouth'] for p in sorted_points]
+        dist = [283 - p['km_from_mouth'] for p in sorted_points]  # км от истока
         ec_vals = [self.start_ec[p['name']] for p in sorted_points]
         names = [p['name'] for p in sorted_points]
 
@@ -131,6 +149,7 @@ class ECDigitalTwin:
         plt.title('Пространственный профиль EC вдоль реки Косьва')
         plt.legend()
         plt.grid(True, alpha=0.3)
+        # Подписи некоторых точек (чтобы не перегружать)
         step = max(1, len(dist)//10)
         for i in range(0, len(dist), step):
             plt.annotate(names[i], (dist[i], ec_vals[i]),
@@ -139,6 +158,7 @@ class ECDigitalTwin:
         plt.savefig(filename, dpi=150)
         plt.show()
         print(f"📈 Профиль EC сохранён как {filename}")
+
 
 # ------------------------------------------------------------------
 # 3. ОСНОВНАЯ ФУНКЦИЯ

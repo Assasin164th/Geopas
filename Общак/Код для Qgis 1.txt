@@ -1,0 +1,141 @@
+from qgis.core import QgsProject, QgsVectorLayer, QgsField, QgsGeometry, QgsPointXY, QgsFeature, QgsRasterLayer
+from PyQt5.QtCore import QVariant
+from qgis.utils import iface
+
+# ================= ДАННЫЕ =================
+# Координаты точек (широта, долгота, расстояние_км)
+points_data = [
+    (58.8347, 57.787299, 153),
+    (58.862158, 57.737422, 146),
+    (58.84216, 57.680513, 138),
+    (58.867325, 57.619516, 129),
+    (58.860082, 57.603784, 126),
+    (58.863659, 57.565159, 120),
+    (58.865223, 57.485752, 108),
+    (58.873514, 57.463347, 104),
+    (58.845389, 57.415916, 96),
+    (58.823152, 57.410374, 95),
+    (58.808828, 57.378816, 90),
+    (58.838695, 57.326353, 82),
+    (58.825701, 57.301154, 76),
+    (58.865, 57.19556, 54),
+    (58.75, 57.03, 33),
+    (58.70139, 56.93556, 24),
+    (58.71389, 56.82389, 17),
+    (58.89361, 56.62972, 0)
+]
+
+# Координаты линии русла (в порядке от истока к устью)
+line_coords = [
+    (57.787299, 58.8347),
+    (57.737422, 58.862158),
+    (57.680513, 58.84216),
+    (57.619516, 58.867325),
+    (57.603784, 58.860082),
+    (57.565159, 58.863659),
+    (57.485752, 58.865223),
+    (57.463347, 58.873514),
+    (57.415916, 58.845389),
+    (57.410374, 58.823152),
+    (57.378816, 58.808828),
+    (57.326353, 58.838695),
+    (57.301154, 58.825701),
+    (57.19556, 58.865),
+    (57.03, 58.75),
+    (56.93556, 58.70139),
+    (56.82389, 58.71389),
+    (56.62972, 58.89361)
+]
+
+# ============ 1. ДОБАВЛЯЕМ ФОНОВУЮ КАРТУ (OpenStreetMap) ============
+try:
+    # Создаём слой XYZ Tiles с картой OpenStreetMap
+    url = "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+    osm_layer = QgsRasterLayer("type=xyz&url=" + url, "OpenStreetMap", "wms")
+    if osm_layer.isValid():
+        QgsProject.instance().addMapLayer(osm_layer)
+        print("✅ Фоновая карта OpenStreetMap добавлена.")
+    else:
+        print("⚠️ Не удалось добавить OpenStreetMap, пробуем спутник...")
+        # Альтернатива: спутник Google (без сдвигов)
+        url_sat = "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+        sat_layer = QgsRasterLayer("type=xyz&url=" + url_sat, "Google Satellite", "wms")
+        if sat_layer.isValid():
+            QgsProject.instance().addMapLayer(sat_layer)
+            print("✅ Спутниковая карта Google добавлена.")
+        else:
+            print("❌ Не удалось добавить ни одну фоновую карту.")
+except Exception as e:
+    print(f"Ошибка при добавлении фоновой карты: {e}")
+
+# ============ 2. СОЗДАЁМ СЛОЙ ТОЧЕК ============
+points_layer = QgsVectorLayer("Point?crs=EPSG:4326", "Точки EC (прогноз)", "memory")
+provider = points_layer.dataProvider()
+provider.addAttributes([QgsField("ec", QVariant.Int), QgsField("distance_km", QVariant.Int)])
+points_layer.updateFields()
+
+features = []
+for lat, lon, dist in points_data:
+    feat = QgsFeature()
+    geom = QgsGeometry.fromPointXY(QgsPointXY(lon, lat))
+    feat.setGeometry(geom)
+    feat.setAttributes([5677, dist])
+    features.append(feat)
+provider.addFeatures(features)
+QgsProject.instance().addMapLayer(points_layer)
+print("✅ Точки загружены.")
+
+# ============ 3. СОЗДАЁМ СЛОЙ ЛИНИИ ============
+line_layer = QgsVectorLayer("LineString?crs=EPSG:4326", "Русло р. Косьва", "memory")
+line_provider = line_layer.dataProvider()
+line_geom = QgsGeometry.fromPolylineXY([QgsPointXY(lon, lat) for lon, lat in line_coords])
+feat_line = QgsFeature()
+feat_line.setGeometry(line_geom)
+line_provider.addFeatures([feat_line])
+QgsProject.instance().addMapLayer(line_layer)
+print("✅ Линия реки загружена.")
+
+# ============ 4. НАСТРОЙКА СТИЛЯ ============
+# Делаем линию красной и толще
+iface.setActiveLayer(line_layer)
+iface.layerStylingUtils().setLayerStyle(line_layer, 
+    """<qgis>
+    <renderer-v2 type="singleSymbol">
+        <symbols>
+            <symbol type="line" alpha="1">
+                <layer class="SimpleLine" pass="0">
+                    <prop k="color" v="255,0,0,255"/>
+                    <prop k="width" v="1.5"/>
+                </layer>
+            </symbol>
+        </symbols>
+    </renderer-v2>
+    </qgis>""")
+
+# Точки сделаем яркими и с всплывающими подсказками (можно потом настроить вручную)
+iface.setActiveLayer(points_layer)
+iface.layerStylingUtils().setLayerStyle(points_layer,
+    """<qgis>
+    <renderer-v2 type="singleSymbol">
+        <symbols>
+            <symbol type="marker" alpha="1">
+                <layer class="SimpleMarker" pass="0">
+                    <prop k="color" v="255,165,0,255"/>
+                    <prop k="size" v="6"/>
+                    <prop k="outline_color" v="0,0,0,255"/>
+                </layer>
+            </symbol>
+        </symbols>
+    </renderer-v2>
+    </qgis>""")
+
+# ============ 5. МАСШТАБИРУЕМ НА ОБЛАСТЬ ============
+extent = line_layer.extent()
+# Немного расширим область для комфортного просмотра
+extent.scale(1.2)
+iface.mapCanvas().setExtent(extent)
+iface.mapCanvas().refresh()
+
+print("\n✅ ВСЕ ГОТОВО!")
+print("👉 На карте: фон (OpenStreetMap), точки (оранжевые) и русло реки (красная линия).")
+print("👉 Сохраните проект: Файл → Сохранить проект как...")
